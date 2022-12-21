@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">NaviGator</string>
+    <string name="hint_day">Day…</string>
+    <string name="button_save">Save</string>
+    <string name="empty_not_saved">Day not saved; it is a hollow shell, empty, unplanned, void.</string>
+    <string name="add_day">Add Day</string>
+</resources>

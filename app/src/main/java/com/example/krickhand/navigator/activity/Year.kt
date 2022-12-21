@@ -10,7 +10,7 @@ import com.example.krickhand.navigator.databinding.ActivityYearBinding
 import com.example.krickhand.navigator.viewmodel.DayViewModel
 import com.example.krickhand.navigator.viewmodel.DayViewModelFactory
 
-class YearActivity : AppCompatActivity() {
+class Year : AppCompatActivity() {
 
     private val dayViewModel: DayViewModel by viewModels {
         DayViewModelFactory((application as NaviGatorApplication).repository)
@@ -28,9 +28,6 @@ class YearActivity : AppCompatActivity() {
         binding.recyclerView.adapter = adapter
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
 
-        // Add an observer on the LiveData returned by getAlphabetizedWords.
-        // The onChanged() method fires when the observed data changes and the activity is
-        // in the foreground.
         dayViewModel.allDays.observe(this) { days ->
             // Update the cached copy of the words in the adapter.
             days.let { adapter.submitList(it) }
