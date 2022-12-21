@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/year_view">
+
+    <activity
+        android:id="@+id/year_view"
+        android:name="com.example.krickhand.navigator.activity.YearActivity"
+        android:label="activity_year"
+        tools:layout="@layout/activity_year" />
+
+</navigation>
