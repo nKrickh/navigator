@@ -4,7 +4,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "day_table")
+@Entity(tableName = "Days")
 data class Day(
     @PrimaryKey(autoGenerate = true) val dayId: Long = 0,
     @ColumnInfo val dayShort: String,
