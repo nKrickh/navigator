@@ -13,4 +13,5 @@ class NaviGatorApplication : Application() {
     // rather than when the application starts
     val database by lazy { NavigatorRoomDB.getDatabase(this, applicationScope) }
     val repository by lazy { DayRepository(database.dayDao()) }
+
 }

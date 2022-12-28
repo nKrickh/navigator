@@ -2,6 +2,7 @@ package com.example.krickhand.navigator.viewmodel
 
 import androidx.lifecycle.*
 import com.example.krickhand.navigator.entity.Day
+import com.example.krickhand.navigator.entity.DayWithTasks
 import com.example.krickhand.navigator.repo.DayRepository
 import kotlinx.coroutines.launch
 
@@ -12,14 +13,14 @@ class DayViewModel(private val repository: DayRepository) : ViewModel() {
     //   the UI when the data actually changes.
     // - Repository is completely separated from the UI through the ViewModel.
     val allDays: LiveData<List<Day>> = repository.allDays.asLiveData()
-    val today: LiveData<Day> = repository.today.asLiveData()
+    val today: LiveData<DayWithTasks> = repository.today.asLiveData()
 
     /**
      * Launching a new coroutine to insert the data in a non-blocking way
      */
-    fun insert(day: Day) = viewModelScope.launch {
-        repository.insert(day)
-    }
+//    fun insert(day: Day) = viewModelScope.launch {
+//        repository.insert(day)
+//    }
 }
 
 class DayViewModelFactory(private val repository: DayRepository) : ViewModelProvider.Factory {

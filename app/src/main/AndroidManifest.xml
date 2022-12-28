@@ -3,7 +3,7 @@
 
     <application
         android:name=".NaviGatorApplication"
-        android:allowBackup="true"
+        android:allowBackup="false"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
@@ -22,7 +22,7 @@
             android:name=".activity.Year"
             android:exported="false" />
         <activity
-            android:name=".activity.Main"
+            android:name=".activity.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

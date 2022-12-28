@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.krickhand.navigator.R
-import com.example.krickhand.navigator.databinding.RecyclerviewItemBinding
+import com.example.krickhand.navigator.databinding.RecyclerviewDayBinding
 import com.example.krickhand.navigator.entity.Day
 
 class DayListAdapter: ListAdapter<Day, DayListAdapter.DayViewHolder>(DayComparator()) {
@@ -21,18 +21,18 @@ class DayListAdapter: ListAdapter<Day, DayListAdapter.DayViewHolder>(DayComparat
         holder.bind(current)
     }
 
-    class DayViewHolder(private val binding: RecyclerviewItemBinding) : RecyclerView.ViewHolder(binding.root) {
+    class DayViewHolder(private val binding: RecyclerviewDayBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(day: Day?) {
             with (binding) {
                 if (day != null) {
-                    binding.textView.text = day.dayLong
+                    binding.dayName.text = day.dayLong
                 }
             }
         }
 
         companion object {
             fun create(parent: ViewGroup): DayViewHolder {
-                val binding = RecyclerviewItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+                val binding = RecyclerviewDayBinding.inflate(LayoutInflater.from(parent.context), parent, false)
                 return DayViewHolder(binding)
             }
         }

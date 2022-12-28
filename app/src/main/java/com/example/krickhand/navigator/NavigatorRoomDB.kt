@@ -6,7 +6,11 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.example.krickhand.navigator.dao.DayDao
+import com.example.krickhand.navigator.dao.TaskDao
 import com.example.krickhand.navigator.entity.Day
+import com.example.krickhand.navigator.entity.DayTaskCrossRef
+import com.example.krickhand.navigator.entity.DayWithTasks
+import com.example.krickhand.navigator.entity.Task
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import java.time.LocalDate
@@ -17,13 +21,16 @@ import java.util.Date
 // Annotates class to be a Room Database with a table (entity) of the Day class
 @Database(
     entities = [
-        Day::class
-               ],
+        Day::class,
+        Task::class,
+        DayTaskCrossRef::class
+       ],
     version = 1,
     exportSchema = false)
 public abstract class NavigatorRoomDB: RoomDatabase() {
 
     abstract fun dayDao(): DayDao
+    abstract fun taskDao(): TaskDao
 
     companion object {
         // Singleton prevents multiple instances of database opening at the
@@ -57,14 +64,18 @@ public abstract class NavigatorRoomDB: RoomDatabase() {
             super.onCreate(db)
             INSTANCE?.let { database ->
                 scope.launch {
-                    populateDatabase(database.dayDao())
+                    populateDatabase(
+                        database.dayDao(),
+                        database.taskDao()
+                    )
                 }
             }
         }
 
-        suspend fun populateDatabase(dayDao: DayDao) {
+        suspend fun populateDatabase(dayDao: DayDao,taskDao: TaskDao) {
             // A fresh start
             dayDao.deleteAll()
+            taskDao.deleteAll()
 
             // Build a year
             val currentYear = LocalDate.now().year
@@ -86,8 +97,26 @@ public abstract class NavigatorRoomDB: RoomDatabase() {
                         FormatStyle.LONG))))
             }
 
-            dayDao.insertDays(yearOfDays)
+
             //val occasions= getOccasionMap(currentYear)
+            // populate sample tasks
+            var taskId = 1L
+            val tasks = mutableListOf<Task>()
+            val daytasks = mutableListOf<DayTaskCrossRef>()
+
+            val sampleTasks = arrayOf("Fry the fish", "Think more about geology", "Dance briskly")
+            for (task in sampleTasks) {
+                tasks.add(Task(taskId++, task, "Level $taskId"))
+            }
+
+            // TODO: test purpose at this point
+            for (sample in tasks) {
+                daytasks.add(DayTaskCrossRef(1, sample.taskId))
+            }
+
+            dayDao.insertDays(yearOfDays)
+            taskDao.insertTasks(tasks)
+            dayDao.insertDayTasks(daytasks)
 
         }
     }
