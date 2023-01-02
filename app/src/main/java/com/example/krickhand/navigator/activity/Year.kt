@@ -13,7 +13,7 @@ import com.example.krickhand.navigator.viewmodel.DayViewModelFactory
 class Year : AppCompatActivity() {
 
     private val dayViewModel: DayViewModel by viewModels {
-        DayViewModelFactory((application as NaviGatorApplication).repository)
+        DayViewModelFactory((application as NaviGatorApplication).dayRepository)
     }
 
     private lateinit var binding: ActivityYearBinding

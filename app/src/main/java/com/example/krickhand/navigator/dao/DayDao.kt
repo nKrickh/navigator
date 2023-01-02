@@ -2,7 +2,7 @@ package com.example.krickhand.navigator.dao
 
 import androidx.room.*
 import com.example.krickhand.navigator.entity.Day
-import com.example.krickhand.navigator.entity.DayTaskCrossRef
+import com.example.krickhand.navigator.entity.DayTaskJoin
 import com.example.krickhand.navigator.entity.DayWithTasks
 //import com.example.krickhand.navigator.entity.DayWithTasks
 import kotlinx.coroutines.flow.Flow
@@ -23,7 +23,7 @@ interface DayDao {
     suspend fun insertDays(days: List<Day>)
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insertDayTasks(days: List<DayTaskCrossRef>)
+    suspend fun insertDayTasks(days: List<DayTaskJoin>)
 
     @Query("DELETE FROM days")
     suspend fun deleteAll()

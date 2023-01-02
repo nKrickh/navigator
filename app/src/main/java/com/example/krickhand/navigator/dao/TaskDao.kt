@@ -1,10 +1,7 @@
 package com.example.krickhand.navigator.dao
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
-import com.example.krickhand.navigator.entity.Task
+import androidx.room.*
+import com.example.krickhand.navigator.entity.*
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -22,6 +19,13 @@ interface TaskDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertTasks(tasks: List<Task>)
 
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun insertTaskTags(tags: List<TaskTagJoin>)
+
     @Query("DELETE FROM tasks")
     suspend fun deleteAll()
+
+    @Transaction
+    @Query("SELECT * FROM tasks WHERE taskId = :id")
+    fun getTaskWithTags(id: Long): Flow<TaskWithTags>
 }

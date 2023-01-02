@@ -5,7 +5,6 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.krickhand.navigator.NaviGatorApplication
-import com.example.krickhand.navigator.adapter.DayListAdapter
 import com.example.krickhand.navigator.adapter.TaskListAdapter
 import com.example.krickhand.navigator.databinding.ActivityDayBinding
 import com.example.krickhand.navigator.viewmodel.DayViewModel
@@ -15,7 +14,7 @@ class Day : AppCompatActivity() {
 
     private lateinit var binding: ActivityDayBinding
     private val dayViewModel: DayViewModel by viewModels {
-        DayViewModelFactory((application as NaviGatorApplication).repository)
+        DayViewModelFactory((application as NaviGatorApplication).dayRepository)
     }
 
     // Lifecycle

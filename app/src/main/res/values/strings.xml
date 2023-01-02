@@ -4,4 +4,7 @@
     <string name="button_save">Save</string>
     <string name="empty_not_saved">Day not saved; it is a hollow shell, empty, unplanned, void.</string>
     <string name="add_day">Add Day</string>
+    <string name="task_fab">See More Task Details</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

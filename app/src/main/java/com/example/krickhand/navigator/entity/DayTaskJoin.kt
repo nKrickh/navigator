@@ -6,7 +6,7 @@ import androidx.room.*
     tableName = "DayTask_Join",
     primaryKeys = ["dayId", "taskId"]
 )
-data class DayTaskCrossRef(
+data class DayTaskJoin(
     @ColumnInfo val dayId: Long,
     @ColumnInfo val taskId: Long
 )
@@ -16,7 +16,7 @@ data class DayWithTasks(
     @Relation(
         parentColumn = "dayId",
         entityColumn = "taskId",
-        associateBy = Junction(DayTaskCrossRef::class)
+        associateBy = Junction(DayTaskJoin::class)
     )
     val tasks: List<Task>
 )
@@ -26,7 +26,7 @@ data class TaskWithDays(
     @Relation(
         parentColumn = "taskId",
         entityColumn = "dayId",
-        associateBy = Junction(DayTaskCrossRef::class)
+        associateBy = Junction(DayTaskJoin::class)
     )
     val days: List<Day>
 )

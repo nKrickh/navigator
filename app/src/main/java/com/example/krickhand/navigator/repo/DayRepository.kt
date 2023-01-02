@@ -2,6 +2,7 @@ package com.example.krickhand.navigator.repo
 
 //import androidx.annotation.WorkerThread
 import com.example.krickhand.navigator.dao.DayDao
+import com.example.krickhand.navigator.dao.TaskDao
 import com.example.krickhand.navigator.entity.Day
 import com.example.krickhand.navigator.entity.DayWithTasks
 import kotlinx.coroutines.flow.Flow
@@ -9,7 +10,7 @@ import kotlinx.coroutines.flow.Flow
 
 // Declares the DAO as a private property in the constructor. Pass in the DAO
 // instead of the whole database, because you only need access to the DAO
-class DayRepository(private val dayDao: DayDao) {
+class DayRepository(private val dayDao: DayDao, private val taskDao: TaskDao) {
 
     // Room executes all queries on a separate thread.
     // Observed Flow will notify the observer when the data has changed.
