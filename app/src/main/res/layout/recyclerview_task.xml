@@ -26,7 +26,6 @@
         android:fontFamily="sans-serif-black"
         android:gravity="start"
         android:letterSpacing="0.125"
-        android:text="ddd"
         android:textAlignment="textStart"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textSize="20sp"

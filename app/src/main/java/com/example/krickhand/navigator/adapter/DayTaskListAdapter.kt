@@ -8,8 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.krickhand.navigator.databinding.RecyclerviewTaskBinding
 import com.example.krickhand.navigator.entity.Task
 
-class TaskListAdapter: ListAdapter<Task, TaskListAdapter.TaskViewHolder>(TaskComparator()) {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder {
+class DayTaskListAdapter(): ListAdapter<Task, DayTaskListAdapter.TaskViewHolder>(TaskComparator()) {
+override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder {
         return TaskViewHolder.create(parent)
     }
 
@@ -22,6 +22,11 @@ class TaskListAdapter: ListAdapter<Task, TaskListAdapter.TaskViewHolder>(TaskCom
         fun bind(task: Task?) {
             if (task != null) {
                 binding.taskName.text = task.name
+                binding.floatingActionButton.setOnClickListener {
+                    val testId = 1L
+                    //val action = DayTaskListFragmentDirections
+                }
+
             }
         }
 

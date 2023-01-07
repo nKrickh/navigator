@@ -6,15 +6,10 @@
     app:startDestination="@id/day_view">
 
     <activity
-        android:id="@+id/year_view"
-        android:name="com.example.krickhand.navigator.activity.Year"
-        android:label="activity_year"
-        tools:layout="@layout/activity_year" />
-
-    <activity
         android:id="@+id/day_view"
         android:name="com.example.krickhand.navigator.activity.Day"
         android:label="activity_day"
-        tools:layout="@layout/activity_day" />
+        tools:layout="@layout/activity_day"
+    />
 
 </navigation>

@@ -4,10 +4,11 @@ import androidx.lifecycle.*
 import com.example.krickhand.navigator.entity.Day
 import com.example.krickhand.navigator.entity.DayWithTasks
 import com.example.krickhand.navigator.entity.Task
+import com.example.krickhand.navigator.entity.TaskWithTags
 import com.example.krickhand.navigator.repo.DayRepository
 import kotlinx.coroutines.launch
 
-class DayViewModel(repository: DayRepository) : ViewModel() {
+class DayViewModel(private val repository: DayRepository) : ViewModel() {
 
     // Using LiveData and caching what allWords returns has several benefits:
     // - We can put an observer on the data (instead of polling for changes) and only update the
@@ -16,11 +17,12 @@ class DayViewModel(repository: DayRepository) : ViewModel() {
     val allDays: LiveData<List<Day>> = repository.allDays.asLiveData()
     val today: LiveData<DayWithTasks> = repository.today.asLiveData()
 
-    private val mutableSelectedTask = MutableLiveData<Task>()
-    val selectedTask: LiveData<Task> get() = mutableSelectedTask
+    // For the given selected current task
+    private val mutableSelectedTask = MutableLiveData<TaskWithTags>()
+    val selectedTask: LiveData<TaskWithTags> get() = mutableSelectedTask
 
     fun selectTask(task: Task) {
-        mutableSelectedTask.value = task
+        mutableSelectedTask.value = repository.getTask(task.taskId)
     }
     /**
      * Launching a new coroutine to insert the data in a non-blocking way
