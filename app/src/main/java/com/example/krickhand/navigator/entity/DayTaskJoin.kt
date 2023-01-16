@@ -7,6 +7,7 @@ import androidx.room.*
     primaryKeys = ["dayId", "taskId"]
 )
 data class DayTaskJoin(
+    //@PrimaryKey(autoGenerate = true) val id: Long = 0,
     @ColumnInfo val dayId: Long,
     @ColumnInfo val taskId: Long
 )

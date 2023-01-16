@@ -8,13 +8,13 @@ import com.example.krickhand.navigator.NaviGatorApplication
 import com.example.krickhand.navigator.adapter.DayListAdapter
 import com.example.krickhand.navigator.databinding.ActivityYearBinding
 import com.example.krickhand.navigator.viewmodel.DayViewModel
-import com.example.krickhand.navigator.viewmodel.DayViewModelFactory
+
 
 class Year : AppCompatActivity() {
 
-    private val dayViewModel: DayViewModel by viewModels {
-        DayViewModelFactory((application as NaviGatorApplication).dayRepository)
-    }
+//    private val dayViewModel: DayViewModel by viewModels {
+//        DayViewModelFactory((application as NaviGatorApplication).dayRepository)
+//    }
 
     private lateinit var binding: ActivityYearBinding
 
@@ -28,9 +28,9 @@ class Year : AppCompatActivity() {
         binding.recyclerView.adapter = adapter
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
 
-        dayViewModel.allDays.observe(this) { days ->
-            // Update the cached copy of the words in the adapter.
-            days.let { adapter.submitList(it) }
-        }
+//        dayViewModel.allDays.observe(this) { days ->
+//            // Update the cached copy of the words in the adapter.
+//            days.let { adapter.submitList(it) }
+//        }
     }
 }

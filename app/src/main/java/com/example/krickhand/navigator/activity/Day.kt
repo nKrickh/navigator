@@ -2,7 +2,11 @@ package com.example.krickhand.navigator.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.activity.viewModels
+import com.example.krickhand.navigator.NaviGatorApplication
 import com.example.krickhand.navigator.databinding.ActivityDayBinding
+import com.example.krickhand.navigator.viewmodel.DayViewModel
+
 
 class Day : AppCompatActivity() {
 
@@ -16,6 +20,8 @@ class Day : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityDayBinding.inflate(layoutInflater)
         val view = binding.root
+
+        //val dayViewModel: DayViewModel by viewModels()
         setContentView(view)
 
 

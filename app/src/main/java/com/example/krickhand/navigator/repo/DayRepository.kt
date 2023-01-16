@@ -16,7 +16,7 @@ class DayRepository(private val dayDao: DayDao, private val taskDao: TaskDao) {
 
     // Room executes all queries on a separate thread.
     // Observed Flow will notify the observer when the data has changed.
-    val allDays: Flow<List<Day>> = dayDao.getAlphabetizedDays()
+    //val allDays: Flow<List<Day>> = dayDao.getAlphabetizedDays()
     val today: Flow<DayWithTasks> = dayDao.getDayWithTasks(1)
 
     fun getTask(id: Long): TaskWithTags {

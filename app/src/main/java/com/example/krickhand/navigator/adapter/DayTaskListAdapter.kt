@@ -7,6 +7,9 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.krickhand.navigator.databinding.RecyclerviewTaskBinding
 import com.example.krickhand.navigator.entity.Task
+import androidx.navigation.*
+import com.example.krickhand.navigator.entity.DayTaskJoin
+import com.example.krickhand.navigator.fragment.DayTaskListFragmentDirections
 
 class DayTaskListAdapter(): ListAdapter<Task, DayTaskListAdapter.TaskViewHolder>(TaskComparator()) {
 override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder {
@@ -24,7 +27,8 @@ override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolde
                 binding.taskName.text = task.name
                 binding.floatingActionButton.setOnClickListener {
                     val testId = 1L
-                    //val action = DayTaskListFragmentDirections
+                    val action = DayTaskListFragmentDirections.navigateToDaytaskDetail(testId)
+                    it.findNavController().navigate(action)
                 }
 
             }

@@ -6,7 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.krickhand.navigator.NaviGatorApplication
 import com.example.krickhand.navigator.adapter.DayTaskListAdapter
 import com.example.krickhand.navigator.databinding.FragmentDayTaskListBinding
 import com.example.krickhand.navigator.viewmodel.DayViewModel
@@ -26,7 +28,11 @@ class DayTaskListFragment : Fragment() {
     private var _binding: FragmentDayTaskListBinding? = null
     private val binding get() = _binding!!
     private lateinit var adapter: DayTaskListAdapter
-    private val dayViewModel: DayViewModel by activityViewModels()
+    private val dayViewModel: DayViewModel by viewModels {DayViewModel.Factory}
+    //private val dayViewModel: DayViewModel by activityViewModels()
+//    private val dayViewModel: DayViewModel by viewModels {
+//        DayViewModel.DayViewModelFactory((application as NaviGatorApplication).dayRepository)
+//    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -34,6 +40,7 @@ class DayTaskListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentDayTaskListBinding.inflate(inflater, container, false)
+        //val dayViewModel: DayViewModel by activityViewModels()
         return binding.root
     }
 
@@ -42,8 +49,10 @@ class DayTaskListFragment : Fragment() {
         binding.recyclerView.adapter = adapter
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
+
         dayViewModel.today.observe(viewLifecycleOwner) { dayWithTasks ->
             dayWithTasks.let {adapter.submitList(dayWithTasks.tasks)}
+            binding.dayTitle.text = dayWithTasks.day.dayLong
         }
 
     }
