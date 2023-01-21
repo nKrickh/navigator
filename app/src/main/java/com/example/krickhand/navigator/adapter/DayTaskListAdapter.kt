@@ -5,50 +5,47 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.krickhand.navigator.databinding.RecyclerviewTaskBinding
-import com.example.krickhand.navigator.entity.Task
 import androidx.navigation.*
-import com.example.krickhand.navigator.entity.DayTaskJoin
+import com.example.krickhand.navigator.databinding.RecyclerviewDaytaskBinding
+import com.example.krickhand.navigator.dto.DayTaskListItem
 import com.example.krickhand.navigator.fragment.DayTaskListFragmentDirections
 
-class DayTaskListAdapter(): ListAdapter<Task, DayTaskListAdapter.TaskViewHolder>(TaskComparator()) {
-override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder {
-        return TaskViewHolder.create(parent)
+class DayTaskListAdapter(): ListAdapter<DayTaskListItem, DayTaskListAdapter.DayTaskViewHolder>(DayTaskDetailComparator()) {
+override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DayTaskViewHolder {
+        return DayTaskViewHolder.create(parent)
     }
 
-    override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: DayTaskViewHolder, position: Int) {
         val current = getItem(position)
         holder.bind(current)
     }
 
-    class TaskViewHolder(private val binding: RecyclerviewTaskBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(task: Task?) {
-            if (task != null) {
-                binding.taskName.text = task.name
+    class DayTaskViewHolder(private val binding: RecyclerviewDaytaskBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(item: DayTaskListItem?) {
+            if (item != null) {
+                binding.taskName.text = item.taskName
                 binding.floatingActionButton.setOnClickListener {
-                    val testId = 1L
-                    val action = DayTaskListFragmentDirections.navigateToDaytaskDetail(testId)
+                    val action = DayTaskListFragmentDirections.navigateToDaytaskDetail(item.tId)
                     it.findNavController().navigate(action)
                 }
-
             }
         }
 
         companion object {
-            fun create(parent: ViewGroup): TaskViewHolder {
-                val binding = RecyclerviewTaskBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-                return TaskViewHolder(binding)
+            fun create(parent: ViewGroup): DayTaskViewHolder {
+                val binding = RecyclerviewDaytaskBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+                return DayTaskViewHolder(binding)
             }
         }
     }
 
-    class TaskComparator : DiffUtil.ItemCallback<Task>() {
-        override fun areItemsTheSame(oldItem: Task, newItem: Task): Boolean {
+    class DayTaskDetailComparator : DiffUtil.ItemCallback<DayTaskListItem>() {
+        override fun areItemsTheSame(oldItem: DayTaskListItem, newItem: DayTaskListItem): Boolean {
             return oldItem === newItem
         }
 
-        override fun areContentsTheSame(oldItem: Task, newItem: Task): Boolean {
-            return oldItem.taskId == newItem.taskId
+        override fun areContentsTheSame(oldItem: DayTaskListItem, newItem: DayTaskListItem): Boolean {
+            return oldItem.tId == newItem.tId
         }
     }
 }

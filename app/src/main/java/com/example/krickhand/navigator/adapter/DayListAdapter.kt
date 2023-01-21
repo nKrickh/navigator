@@ -1,13 +1,10 @@
 package com.example.krickhand.navigator.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.krickhand.navigator.R
 import com.example.krickhand.navigator.databinding.RecyclerviewDayBinding
 import com.example.krickhand.navigator.entity.Day
 
@@ -44,7 +41,7 @@ class DayListAdapter: ListAdapter<Day, DayListAdapter.DayViewHolder>(DayComparat
         }
 
         override fun areContentsTheSame(oldItem: Day, newItem: Day): Boolean {
-            return oldItem.dayId == newItem.dayId
+            return oldItem.id == newItem.id
         }
     }
 }

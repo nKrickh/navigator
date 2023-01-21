@@ -9,7 +9,7 @@
         android:id="@+id/day_fragment"
         android:name="com.example.krickhand.navigator.fragment.DayTaskListFragment"
         android:label="fragment_day"
-        tools:layout="@layout/fragment_day_task_list">
+        tools:layout="@layout/fragment_daytask_list">
         <action
             android:id="@+id/navigate_to_daytask_detail"
             app:destination="@id/daytask_detail"

@@ -10,7 +10,7 @@ interface TaskDao {
     fun getAlphabetizedTasks(): Flow<List<Task>>
 
     // TO-DO: Why won't suspend with in repo?
-    @Query("SELECT * FROM tasks WHERE taskId = :id")
+    @Query("SELECT * FROM tasks WHERE id = :id")
     fun getTask(id: Long): Flow<Task>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
@@ -20,12 +20,12 @@ interface TaskDao {
     suspend fun insertTasks(tasks: List<Task>)
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insertTaskTags(tags: List<TaskTagJoin>)
+    suspend fun insertTaskTags(tags: List<TaskTag>)
 
     @Query("DELETE FROM tasks")
     suspend fun deleteAll()
 
-    @Transaction
-    @Query("SELECT * FROM tasks WHERE taskId = :id")
-    fun getTaskWithTags(id: Long): TaskWithTags
+//    @Transaction
+//    @Query("SELECT * FROM tasks WHERE taskId = :id")
+//    fun getTaskWithTags(id: Long): TaskWithTags
 }

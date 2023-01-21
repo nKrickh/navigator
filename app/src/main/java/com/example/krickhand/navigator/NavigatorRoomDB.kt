@@ -22,13 +22,13 @@ import java.time.format.FormatStyle
         Task::class,
         Tag::class,
         Topic::class,
-        DayTaskJoin::class,
-        TaskTagJoin::class,
-        TopicTagJoin::class
+        DayTask::class,
+        TaskTag::class,
+        TopicTag::class
        ],
     version = 1,
     exportSchema = false)
-public abstract class NavigatorRoomDB: RoomDatabase() {
+abstract class NavigatorRoomDB: RoomDatabase() {
 
     abstract fun dayDao(): DayDao
     abstract fun taskDao(): TaskDao
@@ -60,7 +60,7 @@ public abstract class NavigatorRoomDB: RoomDatabase() {
 
     private class NavigatorDBCallback(
         private val scope: CoroutineScope
-    ) : RoomDatabase.Callback() {
+    ) : Callback() {
 
         override fun onCreate(db: SupportSQLiteDatabase) {
             super.onCreate(db)
@@ -110,16 +110,16 @@ public abstract class NavigatorRoomDB: RoomDatabase() {
             // populate sample tasks
             var taskId = 1L
             val tasks = mutableListOf<Task>()
-            val daytasks = mutableListOf<DayTaskJoin>()
+            val daytasks = mutableListOf<DayTask>()
             val sampleTasks = arrayOf("Fry the fish", "Think more about geology", "Dance briskly")
             for (task in sampleTasks) {
                 tasks.add(Task(taskId, task, "Level $taskId"))
-                daytasks.add(DayTaskJoin(1, taskId++))
+                daytasks.add(DayTask(1, taskId++))
             }
 
             // TODO: test purpose at this point
 //            for (sample in tasks) {
-//                daytasks.add(DayTaskJoin(1, sample.taskId))
+//                daytasks.add(DayTask(1, sample.taskId))
 //            }
 
             var tagId = 1L
@@ -127,24 +127,24 @@ public abstract class NavigatorRoomDB: RoomDatabase() {
             var topicCounter = 1L
             val tags = mutableListOf<Tag>()
             val topics = mutableListOf<Topic>()
-            val tagWithTopics = mutableListOf<TopicTagJoin>()
+            val tagWithTopics = mutableListOf<TopicTag>()
             val sampleTags = arrayOf("Tag 1", "Tag 2", "Tag 3", "Tag 4", "Tag 5", "Tag 6")
             val sampleTopics = arrayOf("Topical Inquiries", "Raging Sadism", "Tendrils of Tinnitus")
 
             for (topic in sampleTopics) topics.add(Topic(topicId++, topic))
             for (tag in sampleTags) {
                 tags.add(Tag(tagId, tag, "Tag of the $tagId"))
-                tagWithTopics.add(TopicTagJoin(topicCounter++, tagId++))
+                tagWithTopics.add(TopicTag(topicCounter++, tagId++))
                 if (topicCounter > 3)
                     topicCounter = 1L
             }
 
-            val sampleTaskTags = mutableListOf<TaskTagJoin>(
-                TaskTagJoin(1, 2),
-                TaskTagJoin(1, 5),
-                TaskTagJoin(2, 4),
-                TaskTagJoin(3, 6),
-                TaskTagJoin(3, 2)
+            val sampleTaskTags = mutableListOf(
+                TaskTag(1, 2),
+                TaskTag(1, 5),
+                TaskTag(2, 4),
+                TaskTag(3, 6),
+                TaskTag(3, 2)
             )
 
             dayDao.insertDays(yearOfDays)

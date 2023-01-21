@@ -16,7 +16,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-black"
             android:textAlignment="center"
-            android:textSize="20sp"
+            android:textSize="120sp"
             android:textStyle="bold"
             android:typeface="sans"
             app:layout_constraintEnd_toEndOf="parent"
