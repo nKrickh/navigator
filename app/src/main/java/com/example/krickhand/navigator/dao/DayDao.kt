@@ -25,7 +25,7 @@ interface DayDao {
                 "JOIN tasks AS t ON dt.taskId = t.id " +
                 "WHERE t.id = :id"
     )
-    fun loadDayTaskDetails(id: Long): Flow<DayTaskDetail>
+    fun loadDayTaskDetails(id: Long): DayTaskDetail
 
     @Query("SELECT t.id AS tId, t.name AS taskName, dt.isComplete FROM tasks AS t " +
             "JOIN daytasks AS dt ON dt.taskId = t.id " +

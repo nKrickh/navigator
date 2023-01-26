@@ -19,9 +19,6 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".activity.Year"
-            android:exported="false" />
-        <activity
             android:name=".activity.MainActivity"
             android:exported="true">
             <intent-filter>

@@ -26,7 +26,7 @@ import androidx.room.*
 data class DayTask(
     val dayId: Long,
     val taskId: Long,
-    val isComplete: Boolean = false,
+    val isComplete: Boolean? = false,
     val scheduledStart: String? = "",
     val scheduledEnd: String? = "",
     val desc: String? = ""

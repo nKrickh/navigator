@@ -14,12 +14,10 @@ class DayTaskListAdapter(): ListAdapter<DayTaskListItem, DayTaskListAdapter.DayT
 override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DayTaskViewHolder {
         return DayTaskViewHolder.create(parent)
     }
-
     override fun onBindViewHolder(holder: DayTaskViewHolder, position: Int) {
         val current = getItem(position)
         holder.bind(current)
     }
-
     class DayTaskViewHolder(private val binding: RecyclerviewDaytaskBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: DayTaskListItem?) {
             if (item != null) {

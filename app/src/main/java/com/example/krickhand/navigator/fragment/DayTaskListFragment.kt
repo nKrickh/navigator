@@ -48,7 +48,8 @@ class DayTaskListFragment : Fragment() {
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
         dayViewModel.today.observe(viewLifecycleOwner) { day ->
-            binding.dayTitle.text = day.dayLong
+            if (day != null)
+                binding.dayTitle.text = day.dayLong
         }
 
         dayViewModel.daytasklist.observe(viewLifecycleOwner) { items ->

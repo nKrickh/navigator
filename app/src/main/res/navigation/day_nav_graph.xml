@@ -18,9 +18,9 @@
 
     <fragment
         android:id="@+id/daytask_detail"
-        android:name="com.example.krickhand.navigator.fragment.TaskDetailFragment"
+        android:name="com.example.krickhand.navigator.fragment.DayTaskDetailFragment"
         android:label="fragment_day"
-        tools:layout="@layout/fragment_day_task_detail">
+        tools:layout="@layout/fragment_daytask_detail">
         <argument
             android:name="daytask_id"
             app:argType="long"/>

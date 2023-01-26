@@ -5,7 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.krickhand.navigator.databinding.FragmentDayTaskDetailBinding
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.navArgs
+import com.example.krickhand.navigator.databinding.FragmentDaytaskDetailBinding
+import com.example.krickhand.navigator.viewmodel.DayViewModel
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -14,27 +17,30 @@ private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
- * Use the [TaskDetailFragment.newInstance] factory method to
+ * Use the [DayTaskDetailFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class TaskDetailFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+class DayTaskDetailFragment : Fragment() {
+//    // TODO: Rename and change types of parameters
+//    private var param1: String? = null
+//    private var param2: String? = null
 
-    private var _binding: FragmentDayTaskDetailBinding? = null
+    private var _binding: FragmentDaytaskDetailBinding? = null
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
+    private val dayViewModel: DayViewModel by viewModels { DayViewModel.Factory}
+    private val args: DayTaskDetailFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentDayTaskDetailBinding.inflate(inflater, container, false)
-        val view = binding.root
-        return view
+        _binding = FragmentDaytaskDetailBinding.inflate(inflater, container, false)
+        //val view = binding.root
+        dayViewModel.setDayTask(args.daytaskId)
+        return binding.root
     }
 
     override fun onDestroyView() {
@@ -42,13 +48,26 @@ class TaskDetailFragment : Fragment() {
         _binding = null
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    //        binding.detailDay.text = args.daytaskId.toString()
+        //dayViewModel.setDayTask(args.daytaskId)
+        dayViewModel.dayTask.observe(viewLifecycleOwner) {
+            binding.detailDay.text = it.dayShort
+            binding.detailTask.text = it.taskName
+            binding.detailTaskDesc.text = it.taskDesc
+            binding.detailDesc.text = it.desc
+            binding.detailScheduledStart.text = it.scheduledStart
+            binding.detailScheduledEnd.text = it.scheduledEnd
         }
     }
+
+//    override fun onCreate(savedInstanceState: Bundle?) {
+//        super.onCreate(savedInstanceState)
+//        arguments?.let {
+//            param1 = it.getString(ARG_PARAM1)
+//            param2 = it.getString(ARG_PARAM2)
+//        }
+//    }
 
 //    override fun onCreateView(
 //        inflater: LayoutInflater, container: ViewGroup?,
@@ -65,12 +84,12 @@ class TaskDetailFragment : Fragment() {
          *
          * @param param1 Parameter 1.
          * @param param2 Parameter 2.
-         * @return A new instance of fragment TaskDetailFragment.
+         * @return A new instance of fragment DayTaskDetailFragment.
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            TaskDetailFragment().apply {
+            DayTaskDetailFragment().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)
