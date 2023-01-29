@@ -49,5 +49,4 @@
         app:maxImageSize="18dp"
         app:srcCompat="@android:drawable/ic_dialog_info" />
 
-
 </androidx.constraintlayout.widget.ConstraintLayout>

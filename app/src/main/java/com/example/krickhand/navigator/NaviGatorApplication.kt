@@ -12,7 +12,7 @@ class NaviGatorApplication : Application() {
     // Using by lazy so the database and the repository are only created when they're needed
     // rather than when the application starts
     val database by lazy { NavigatorRoomDB.getDatabase(this, applicationScope) }
-    val dayRepository by lazy { DayRepository(database.dayDao(), database.taskDao()) }
+    val dayRepository by lazy { DayRepository(database.dayDao()) }
     //val taskRepository by lazy { TaskRepository(database.taskDao()) }
 
 }

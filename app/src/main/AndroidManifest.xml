@@ -12,6 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NaviGator">
         <activity
+            android:name=".activity.Notes"
+            android:exported="false" />
+        <activity
+            android:name=".activity.Journal"
+            android:exported="false" />
+        <activity
             android:name=".activity.Day"
             android:exported="false">
             <meta-data

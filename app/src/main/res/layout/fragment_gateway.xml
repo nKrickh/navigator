@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragment.GatewayFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimaryDark">
+
+        <ImageButton
+            android:id="@+id/toDay"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:backgroundTint="@color/colorPrimary"
+            android:contentDescription="@string/button_toDay"
+            android:scaleType="fitCenter"
+            android:src="@drawable/baseline_today_24"
+            app:layout_constraintBottom_toTopOf="@+id/toNotes"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/toNotes"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:backgroundTint="@color/colorPrimary"
+            android:contentDescription="@string/button_toNotes_desc"
+            android:scaleType="fitCenter"
+            android:src="@drawable/baseline_library_books_24"
+            app:layout_constraintBottom_toTopOf="@+id/toJournal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toDay" />
+
+        <ImageButton
+            android:id="@+id/toJournal"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:backgroundTint="@color/colorPrimary"
+            android:contentDescription="@string/button_toJournal_desc"
+            android:scaleType="fitCenter"
+            android:src="@drawable/baseline_menu_book_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toNotes" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>

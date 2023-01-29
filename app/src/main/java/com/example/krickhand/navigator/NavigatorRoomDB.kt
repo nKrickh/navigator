@@ -7,7 +7,6 @@ import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.example.krickhand.navigator.dao.DayDao
 import com.example.krickhand.navigator.dao.TagDao
-import com.example.krickhand.navigator.dao.TaskDao
 import com.example.krickhand.navigator.entity.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
@@ -19,19 +18,29 @@ import java.time.format.FormatStyle
 @Database(
     entities = [
         Day::class,
-        Task::class,
         Tag::class,
         Topic::class,
+        Task::class,
+        Status::class,
+        Priority::class,
+        TimeStamp::class,
+        Note::class,
+
         DayTask::class,
         TaskTag::class,
-        TopicTag::class
-       ],
+        TopicTag::class,
+        NoteTag::class,
+
+        Journal::class,
+        JournalEntry::class,
+        JournalPage::class,
+    ],
     version = 1,
     exportSchema = false)
 abstract class NavigatorRoomDB: RoomDatabase() {
 
     abstract fun dayDao(): DayDao
-    abstract fun taskDao(): TaskDao
+    //abstract fun taskDao(): TaskDao
     abstract fun tagDao(): TagDao
 
     companion object {
@@ -68,7 +77,6 @@ abstract class NavigatorRoomDB: RoomDatabase() {
                 scope.launch {
                     populateDatabase(
                         database.dayDao(),
-                        database.taskDao(),
                         database.tagDao()
                     )
                 }
@@ -77,12 +85,11 @@ abstract class NavigatorRoomDB: RoomDatabase() {
 
         suspend fun populateDatabase(
             dayDao: DayDao,
-            taskDao: TaskDao,
             tagDao: TagDao
         ) {
             // A fresh start
-            dayDao.deleteAll()
-            taskDao.deleteAll()
+            dayDao.deleteAllDays()
+            dayDao.deleteAllTasks()
             tagDao.deleteAll()
 
             // Build a year
@@ -148,11 +155,11 @@ abstract class NavigatorRoomDB: RoomDatabase() {
             )
 
             dayDao.insertDays(yearOfDays)
-            taskDao.insertTasks(tasks)
+            dayDao.insertTasks(tasks)
             tagDao.insertTags(tags)
             tagDao.insertTopics(topics)
             tagDao.insertTagTopics(tagWithTopics)
-            taskDao.insertTaskTags(sampleTaskTags)
+            dayDao.insertTaskTags(sampleTaskTags)
             dayDao.insertDayTasks(daytasks)
 
         }

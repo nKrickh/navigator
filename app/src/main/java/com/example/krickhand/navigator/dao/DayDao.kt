@@ -5,6 +5,8 @@ import com.example.krickhand.navigator.dto.DayTaskDetail
 import com.example.krickhand.navigator.dto.DayTaskListItem
 import com.example.krickhand.navigator.entity.Day
 import com.example.krickhand.navigator.entity.DayTask
+import com.example.krickhand.navigator.entity.Task
+import com.example.krickhand.navigator.entity.TaskTag
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -45,6 +47,28 @@ interface DayDao {
     suspend fun insertDayTasks(days: List<DayTask>)
 
     @Query("DELETE FROM days")
-    suspend fun deleteAll()
+    suspend fun deleteAllDays()
+
+    /**
+     * TASKS
+     * */
+    @Query("SELECT * FROM tasks ORDER BY name ASC")
+    fun getAlphabetizedTasks(): Flow<List<Task>>
+
+    // TO-DO: Why won't suspend with in repo?
+    @Query("SELECT * FROM tasks WHERE id = :id")
+    fun getTask(id: Long): Flow<Task>
+
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun insertTask(task: Task)
+
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun insertTasks(tasks: List<Task>)
+
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun insertTaskTags(tags: List<TaskTag>)
+
+    @Query("DELETE FROM tasks")
+    suspend fun deleteAllTasks()
 
 }

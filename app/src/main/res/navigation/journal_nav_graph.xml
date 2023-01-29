@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/journal_nav_graph"
+    app:startDestination="@id/journalEntryListFragment">
+
+    <fragment
+        android:id="@+id/journalEntryListFragment"
+        android:name="com.example.krickhand.navigator.fragment.JournalEntryListFragment"
+        android:label="fragment_journal_entry_list"
+        tools:layout="@layout/fragment_journal_entry_list" >
+        <action
+            android:id="@+id/action_journalEntryListFragment_to_journalEntryFragment"
+            app:destination="@id/journalEntryFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/journalEntryFragment"
+        android:name="com.example.krickhand.navigator.fragment.JournalEntryFragment"
+        android:label="fragment_journal_entry"
+        tools:layout="@layout/fragment_journal_entry" />
+
+</navigation>
