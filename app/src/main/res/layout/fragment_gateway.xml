@@ -13,6 +13,7 @@
 
         <ImageButton
             android:id="@+id/toDay"
+            android:tag="toDay"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:backgroundTint="@color/colorPrimary"
@@ -26,6 +27,7 @@
 
         <ImageButton
             android:id="@+id/toNotes"
+            android:tag="toNotes"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:backgroundTint="@color/colorPrimary"
@@ -40,6 +42,7 @@
 
         <ImageButton
             android:id="@+id/toJournal"
+            android:tag="toJournal"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:backgroundTint="@color/colorPrimary"

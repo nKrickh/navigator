@@ -2,14 +2,11 @@ package com.example.krickhand.navigator.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.krickhand.navigator.databinding.RecyclerviewDaytaskBinding
-import com.example.krickhand.navigator.dto.DayTaskListItem
 import com.example.krickhand.navigator.dto.JournalEntryListItem
-import com.example.krickhand.navigator.fragment.DayTaskListFragmentDirections
 
 class JournalEntryListAdapter(): ListAdapter<JournalEntryListItem, JournalEntryListAdapter.JournalEntryViewHolder>(JournalEntryComparator()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): JournalEntryViewHolder {

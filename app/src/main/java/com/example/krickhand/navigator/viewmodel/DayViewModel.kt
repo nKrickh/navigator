@@ -5,7 +5,6 @@ import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory.Companion.AP
 import androidx.lifecycle.viewmodel.CreationExtras
 import com.example.krickhand.navigator.NaviGatorApplication
 import com.example.krickhand.navigator.dto.DayTaskDetail
-import com.example.krickhand.navigator.dto.DayTaskListItem
 import com.example.krickhand.navigator.entity.*
 import com.example.krickhand.navigator.repo.DayRepository
 
@@ -13,26 +12,18 @@ class DayViewModel(
     private val repository: DayRepository,
     private val savedStateHandle: SavedStateHandle) : ViewModel() {
 
-    // Using LiveData and caching what allWords returns has several benefits:
-    // - We can put an observer on the data (instead of polling for changes) and only update the
-    //   the UI when the data actually changes.
-    // - Repository is completely separated from the UI through the ViewModel.
-    //val allDays: LiveData<List<Day>> = repository.allDays.asLiveData()
+
     val today: LiveData<Day> = repository.today.asLiveData()
-    val daytasklist: LiveData<List<DayTaskListItem>> = repository.currentDayTaskList.asLiveData()
+    val daytasklist: LiveData<List<DayTaskDetail>> = repository.currentDayTaskList.asLiveData()
 
     // For the given selected current task
     private val _daytask = MutableLiveData<DayTaskDetail>()
     val dayTask: LiveData<DayTaskDetail> get() = _daytask
 
-//    fun setDayTask(daytask: DayTaskDetail) {
-//        _daytask.value = daytask
-//    }
-    fun setDayTask(tId: Long) {
-        _daytask.value = repository.getCurrentDayTaskDetail(tId)
+    fun setDayTask(taskId: Long) {
+        val selectedDaytask = daytasklist.value?.get(0)
+        _daytask.value = selectedDaytask!!
     }
-
-
 
     /**
      * Launching a new coroutine to insert the data in a non-blocking way

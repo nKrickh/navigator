@@ -7,10 +7,10 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import androidx.navigation.*
 import com.example.krickhand.navigator.databinding.RecyclerviewDaytaskBinding
-import com.example.krickhand.navigator.dto.DayTaskListItem
+import com.example.krickhand.navigator.dto.DayTaskDetail
 import com.example.krickhand.navigator.fragment.DayTaskListFragmentDirections
 
-class DayTaskListAdapter(): ListAdapter<DayTaskListItem, DayTaskListAdapter.DayTaskViewHolder>(DayTaskDetailComparator()) {
+class DayTaskListAdapter(): ListAdapter<DayTaskDetail, DayTaskListAdapter.DayTaskViewHolder>(DayTaskDetailComparator()) {
 override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DayTaskViewHolder {
         return DayTaskViewHolder.create(parent)
     }
@@ -19,7 +19,7 @@ override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DayTaskViewHo
         holder.bind(current)
     }
     class DayTaskViewHolder(private val binding: RecyclerviewDaytaskBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: DayTaskListItem?) {
+        fun bind(item: DayTaskDetail?) {
             if (item != null) {
                 binding.taskName.text = item.taskName
                 binding.floatingActionButton.setOnClickListener {
@@ -37,13 +37,13 @@ override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DayTaskViewHo
         }
     }
 
-    class DayTaskDetailComparator : DiffUtil.ItemCallback<DayTaskListItem>() {
-        override fun areItemsTheSame(oldItem: DayTaskListItem, newItem: DayTaskListItem): Boolean {
+    class DayTaskDetailComparator : DiffUtil.ItemCallback<DayTaskDetail>() {
+        override fun areItemsTheSame(oldItem: DayTaskDetail, newItem: DayTaskDetail): Boolean {
             return oldItem === newItem
         }
 
-        override fun areContentsTheSame(oldItem: DayTaskListItem, newItem: DayTaskListItem): Boolean {
-            return oldItem.tId == newItem.tId
+        override fun areContentsTheSame(oldItem: DayTaskDetail, newItem: DayTaskDetail): Boolean {
+            return oldItem.tId == newItem.tId && oldItem.dId == newItem.dId
         }
     }
 }

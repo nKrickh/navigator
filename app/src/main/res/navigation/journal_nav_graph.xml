@@ -9,15 +9,6 @@
         android:id="@+id/journalEntryListFragment"
         android:name="com.example.krickhand.navigator.fragment.JournalEntryListFragment"
         android:label="fragment_journal_entry_list"
-        tools:layout="@layout/fragment_journal_entry_list" >
-        <action
-            android:id="@+id/action_journalEntryListFragment_to_journalEntryFragment"
-            app:destination="@id/journalEntryFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/journalEntryFragment"
-        android:name="com.example.krickhand.navigator.fragment.JournalEntryFragment"
-        android:label="fragment_journal_entry"
-        tools:layout="@layout/fragment_journal_entry" />
+        tools:layout="@layout/fragment_journal_entry_list" />
 
 </navigation>

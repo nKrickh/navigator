@@ -2,7 +2,6 @@ package com.example.krickhand.navigator.dao
 
 import androidx.room.*
 import com.example.krickhand.navigator.dto.DayTaskDetail
-import com.example.krickhand.navigator.dto.DayTaskListItem
 import com.example.krickhand.navigator.entity.Day
 import com.example.krickhand.navigator.entity.DayTask
 import com.example.krickhand.navigator.entity.Task
@@ -23,17 +22,19 @@ interface DayDao {
 
     @Query(
         "SELECT d.dayShort, d.id AS dId, t.name AS taskName, t.id AS tId, t.`desc` AS taskDesc, dt.isComplete, dt.scheduledStart, dt.scheduledEnd, dt.`desc` FROM days AS d " +
-                "JOIN daytasks AS dt ON dt.dayId = d.id " +
-                "JOIN tasks AS t ON dt.taskId = t.id " +
-                "WHERE t.id = :id"
+            "JOIN daytasks AS dt ON dt.dayId = d.id " +
+            "JOIN tasks AS t ON dt.taskId = t.id " +
+            "WHERE t.id = :id"
     )
     fun loadDayTaskDetails(id: Long): DayTaskDetail
 
-    @Query("SELECT t.id AS tId, t.name AS taskName, dt.isComplete FROM tasks AS t " +
+    @Query(
+        "SELECT d.dayShort, d.id AS dId, t.id AS tId, t.name AS taskName, t.`desc` AS taskDesc, dt.isComplete, dt.scheduledStart, dt.scheduledEnd, dt.`desc` FROM tasks AS t " +
             "JOIN daytasks AS dt ON dt.taskId = t.id " +
             "JOIN days AS d ON dt.dayId = d.id " +
-            "WHERE d.id = :id")
-    fun loadDayTaskList(id: Long): Flow<List<DayTaskListItem>>
+            "WHERE d.id = :id"
+    )
+    fun loadDayTaskList(id: Long): Flow<List<DayTaskDetail>>
 
 
     // coroutines! not on main UI thread

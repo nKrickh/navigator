@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.krickhand.navigator.adapter.DayTaskListAdapter
@@ -25,8 +26,10 @@ class DayTaskListFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var _binding: FragmentDaytaskListBinding? = null
     private val binding get() = _binding!!
+
     private lateinit var adapter: DayTaskListAdapter
-    private val dayViewModel: DayViewModel by viewModels {DayViewModel.Factory}
+    private val dayViewModel: DayViewModel by activityViewModels {DayViewModel.Factory}
+
     //private val dayViewModel: DayViewModel by activityViewModels()
 //    private val dayViewModel: DayViewModel by viewModels {
 //        DayViewModel.DayViewModelFactory((application as NaviGatorApplication).dayRepository)
@@ -38,11 +41,11 @@ class DayTaskListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentDaytaskListBinding.inflate(inflater, container, false)
-        //val dayViewModel: DayViewModel by activityViewModels()
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         adapter = DayTaskListAdapter()
         binding.recyclerView.adapter = adapter
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())

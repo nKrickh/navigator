@@ -6,8 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
 import com.example.krickhand.navigator.databinding.FragmentDaytaskDetailBinding
+import com.example.krickhand.navigator.dto.DayTaskDetail
 import com.example.krickhand.navigator.viewmodel.DayViewModel
 
 // TODO: Rename parameter arguments, choose names that match
@@ -38,8 +40,6 @@ class DayTaskDetailFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentDaytaskDetailBinding.inflate(inflater, container, false)
-        //val view = binding.root
-        dayViewModel.setDayTask(args.daytaskId)
         return binding.root
     }
 
@@ -49,9 +49,22 @@ class DayTaskDetailFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-    //        binding.detailDay.text = args.daytaskId.toString()
         //dayViewModel.setDayTask(args.daytaskId)
-        dayViewModel.dayTask.observe(viewLifecycleOwner) {
+
+        //        binding.detailDay.text = args.daytaskId.toString()
+        //dayViewModel.setDayTask(args.daytaskId)
+//        dayViewModel.dayTask.observe(viewLifecycleOwner) { dt ->
+//            if (dt != null) {
+//                binding.detailDay.text = dt.dayShort
+//                binding.detailTask.text = dt.taskName
+//                binding.detailTaskDesc.text = dt.taskDesc
+//                binding.detailDesc.text = dt.desc
+//                binding.detailScheduledStart.text = dt.scheduledStart
+//                binding.detailScheduledEnd.text = dt.scheduledEnd
+//            }
+//        }
+        // create observer
+        val daytaskObserver = Observer<DayTaskDetail> {
             binding.detailDay.text = it.dayShort
             binding.detailTask.text = it.taskName
             binding.detailTaskDesc.text = it.taskDesc
@@ -59,6 +72,10 @@ class DayTaskDetailFragment : Fragment() {
             binding.detailScheduledStart.text = it.scheduledStart
             binding.detailScheduledEnd.text = it.scheduledEnd
         }
+
+        // observe selected daytask_detail field in viewmodel
+        dayViewModel.dayTask.observe(viewLifecycleOwner, daytaskObserver)
+        dayViewModel.setDayTask(1L)
     }
 
 //    override fun onCreate(savedInstanceState: Bundle?) {

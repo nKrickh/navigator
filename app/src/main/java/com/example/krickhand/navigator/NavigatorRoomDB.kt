@@ -6,6 +6,8 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.example.krickhand.navigator.dao.DayDao
+import com.example.krickhand.navigator.dao.JournalDao
+import com.example.krickhand.navigator.dao.NoteDao
 import com.example.krickhand.navigator.dao.TagDao
 import com.example.krickhand.navigator.entity.*
 import kotlinx.coroutines.CoroutineScope
@@ -32,7 +34,6 @@ import java.time.format.FormatStyle
         NoteTag::class,
 
         Journal::class,
-        JournalEntry::class,
         JournalPage::class,
     ],
     version = 1,
@@ -40,7 +41,8 @@ import java.time.format.FormatStyle
 abstract class NavigatorRoomDB: RoomDatabase() {
 
     abstract fun dayDao(): DayDao
-    //abstract fun taskDao(): TaskDao
+    abstract fun noteDao(): NoteDao
+    abstract fun journalDao(): JournalDao
     abstract fun tagDao(): TagDao
 
     companion object {

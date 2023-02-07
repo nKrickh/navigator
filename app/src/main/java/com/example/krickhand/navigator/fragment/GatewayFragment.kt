@@ -5,7 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.example.krickhand.navigator.R
+import com.example.krickhand.navigator.databinding.FragmentDaytaskListBinding
+import com.example.krickhand.navigator.databinding.FragmentGatewayBinding
 
 
 private const val ARG_PARAM1 = "param1"
@@ -17,39 +20,44 @@ private const val ARG_PARAM2 = "param2"
  */
 class GatewayFragment : Fragment() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-//        arguments?.let {
-//            param1 = it.getString(com.example.krickhand.navigator.fragment.ARG_PARAM1)
-//            param2 = it.getString(com.example.krickhand.navigator.fragment.ARG_PARAM2)
-//        }
-    }
-
+    private var _binding: FragmentGatewayBinding? = null
+    private val binding get() = _binding!!
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_gateway, container, false)
+    ): View {
+        _binding = FragmentGatewayBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment GatewayFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            GatewayFragment().apply {
-                arguments = Bundle().apply {
-                    putString(com.example.krickhand.navigator.fragment.ARG_PARAM1, param1)
-                    putString(com.example.krickhand.navigator.fragment.ARG_PARAM2, param2)
-                }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.toDay.setOnClickListener {
+            gatewayClickHandler(it)
+        }
+        binding.toJournal.setOnClickListener {
+            gatewayClickHandler(it)
+        }
+        binding.toNotes.setOnClickListener{
+            gatewayClickHandler(it)
+        }
+    }
+      fun gatewayClickHandler(view: View) {
+        when (view.tag) {
+            "toDay" -> {
+                val action = GatewayFragmentDirections.actionGatewayToDayView()
+                this.findNavController().navigate(action)
             }
+            "toNotes" -> {
+                val action = GatewayFragmentDirections.actionGatewayToNotes()
+                this.findNavController().navigate(action)
+            }
+            "toJournal" -> {
+                val action = GatewayFragmentDirections.actionGatewayToJournal()
+                this.findNavController().navigate(action)
+            }
+        }
     }
 }

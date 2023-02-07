@@ -9,19 +9,20 @@
         android:id="@+id/day_view"
         android:name="com.example.krickhand.navigator.activity.Day"
         android:label="activity_day"
-        tools:layout="@layout/activity_day"
-    />
+        tools:layout="@layout/activity_day" />
 
     <activity
         android:id="@+id/journal"
         android:name="com.example.krickhand.navigator.activity.Journal"
         android:label="activity_journal"
         tools:layout="@layout/activity_journal" />
+
     <activity
         android:id="@+id/notes"
         android:name="com.example.krickhand.navigator.activity.Notes"
         android:label="activity_notes"
         tools:layout="@layout/activity_notes" />
+
     <fragment
         android:id="@+id/gateway"
         android:name="com.example.krickhand.navigator.fragment.GatewayFragment"
@@ -37,5 +38,4 @@
             android:id="@+id/action_gateway_to_journal"
             app:destination="@id/journal" />
     </fragment>
-
 </navigation>
