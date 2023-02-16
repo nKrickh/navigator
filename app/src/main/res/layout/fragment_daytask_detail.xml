@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     tools:context=".fragment.DayTaskDetailFragment">
+
+    <data>
+        <variable
+            name="dayViewModel"
+            type="com.example.krickhand.navigator.viewmodel.DayViewModel"/>
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -13,7 +17,8 @@
         <TextView
             android:id="@+id/detailDay"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{dayViewModel.dayTask.dayShort}"
             app:layout_constraintBottom_toTopOf="@id/detailTask"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -22,7 +27,8 @@
         <TextView
             android:id="@+id/detailTask"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{dayViewModel.dayTask.taskName}"
             app:layout_constraintBottom_toBottomOf="@id/detailTaskDesc"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -31,7 +37,8 @@
         <TextView
             android:id="@+id/detailTaskDesc"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{dayViewModel.dayTask.desc}"
             app:layout_constraintBottom_toTopOf="@id/detailScheduledStart"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -40,7 +47,8 @@
         <TextView
             android:id="@+id/detailScheduledStart"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{dayViewModel.dayTask.scheduledStart}"
             app:layout_constraintBottom_toTopOf="@id/detailScheduledEnd"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -49,7 +57,8 @@
         <TextView
             android:id="@+id/detailScheduledEnd"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{dayViewModel.dayTask.scheduledEnd}"
             app:layout_constraintBottom_toTopOf="@id/detailDesc"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -58,12 +67,12 @@
         <TextView
             android:id="@+id/detailDesc"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_constraintBottom_toTopOf="parent"
+            android:layout_height="wrap_content"
+            android:text="@{dayViewModel.dayTask.desc}"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/detailScheduledEnd" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-</FrameLayout>
+</layout>

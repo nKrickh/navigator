@@ -16,12 +16,14 @@ class DayRepository(private val dayDao: DayDao) {
     private val tempId = 1L
     val today = dayDao.getDay(tempId)
     val currentDayTaskList: Flow<List<DayTaskDetail>> = dayDao.loadDayTaskList(tempId)
+
     //private var _currentDayTaskDetail: Flow<DayTaskDetail>
 
-//    fun getCurrentDayTaskDetail(id: Long): DayTaskDetail {
-////        val currentDayTaskDetail = dayDao.loadDayTaskDetails(id)
-//        return dayDao.loadDayTaskDetails(id)
-//    }
+    suspend fun getCurrentDayTaskDetail(id: Long): DayTaskDetail {
+        return dayDao.loadDayTaskDetails(id)
+    }
+
+
 }
     // By default Room runs suspend queries off the main thread, therefore, we don't need to
     // implement anything else to ensure we're not doing long running database work

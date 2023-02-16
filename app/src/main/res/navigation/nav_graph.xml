@@ -6,12 +6,6 @@
     app:startDestination="@id/gateway">
 
     <activity
-        android:id="@+id/day_view"
-        android:name="com.example.krickhand.navigator.activity.Day"
-        android:label="activity_day"
-        tools:layout="@layout/activity_day" />
-
-    <activity
         android:id="@+id/journal"
         android:name="com.example.krickhand.navigator.activity.Journal"
         android:label="activity_journal"
@@ -24,13 +18,34 @@
         tools:layout="@layout/activity_notes" />
 
     <fragment
+        android:id="@+id/daylist_fragment"
+        android:name="com.example.krickhand.navigator.fragment.DayTaskListFragment"
+        android:label="fragment_day"
+        tools:layout="@layout/fragment_daytask_list">
+        <action
+            android:id="@+id/navigate_to_daytask_detail"
+            app:destination="@id/daytask_detail"
+            />
+    </fragment>
+
+    <fragment
+        android:id="@+id/daytask_detail"
+        android:name="com.example.krickhand.navigator.fragment.DayTaskDetailFragment"
+        android:label="fragment_day"
+        tools:layout="@layout/fragment_daytask_detail">
+        <argument
+            android:name="daytask_id"
+            app:argType="long"/>
+    </fragment>
+
+    <fragment
         android:id="@+id/gateway"
         android:name="com.example.krickhand.navigator.fragment.GatewayFragment"
         android:label="fragment_gateway"
         tools:layout="@layout/fragment_gateway" >
         <action
-            android:id="@+id/action_gateway_to_day_view"
-            app:destination="@id/day_view" />
+            android:id="@+id/action_gateway_to_daylist_view"
+            app:destination="@id/daylist_fragment" />
         <action
             android:id="@+id/action_gateway_to_notes"
             app:destination="@id/notes" />

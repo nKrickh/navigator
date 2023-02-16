@@ -7,8 +7,11 @@
 
     <data>
         <variable
-            name="DayTaskList"
+            name="dayTaskList"
             type="com.example.krickhand.navigator.fragment.DayTaskListFragment"/>
+        <variable
+            name="dayViewModel"
+            type="com.example.krickhand.navigator.viewmodel.DayViewModel"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -24,6 +27,7 @@
             android:textSize="55sp"
             android:textStyle="bold"
             android:typeface="sans"
+            android:text="@{dayViewModel.today.dayLong}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -37,6 +41,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/dayTitle"
+            app:daytasklist="@{dayViewModel.data}"
+            app:viewmodel="@{dayViewModel}"
             tools:listitem="@layout/recyclerview_task" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

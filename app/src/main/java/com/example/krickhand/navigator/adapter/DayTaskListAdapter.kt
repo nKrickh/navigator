@@ -1,49 +1,66 @@
 package com.example.krickhand.navigator.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import androidx.navigation.*
-import com.example.krickhand.navigator.databinding.RecyclerviewDaytaskBinding
+
 import com.example.krickhand.navigator.dto.DayTaskDetail
 import com.example.krickhand.navigator.fragment.DayTaskListFragmentDirections
+import com.example.krickhand.navigator.viewmodel.DayViewModel
+import com.example.krickhand.navigator.R
+import com.example.krickhand.navigator.databinding.RecyclerviewTaskBinding
 
-class DayTaskListAdapter(): ListAdapter<DayTaskDetail, DayTaskListAdapter.DayTaskViewHolder>(DayTaskDetailComparator()) {
-override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DayTaskViewHolder {
-        return DayTaskViewHolder.create(parent)
+class DayTaskListAdapter(private val dayViewModel: DayViewModel): RecyclerView.Adapter<DayTaskViewHolder>() {
+
+    private var daytasklist: List<DayTaskDetail> = emptyList()
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DayTaskViewHolder {
+        val binding: RecyclerviewTaskBinding = DataBindingUtil.inflate(
+            LayoutInflater.from(parent.context),
+            R.layout.recyclerview_task,
+            parent,
+            false
+        )
+        return DayTaskViewHolder(binding, dayViewModel)
     }
+
     override fun onBindViewHolder(holder: DayTaskViewHolder, position: Int) {
-        val current = getItem(position)
-        holder.bind(current)
-    }
-    class DayTaskViewHolder(private val binding: RecyclerviewDaytaskBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: DayTaskDetail?) {
-            if (item != null) {
-                binding.taskName.text = item.taskName
-                binding.floatingActionButton.setOnClickListener {
-                    val action = DayTaskListFragmentDirections.navigateToDaytaskDetail(item.tId)
-                    it.findNavController().navigate(action)
-                }
-            }
-        }
-
-        companion object {
-            fun create(parent: ViewGroup): DayTaskViewHolder {
-                val binding = RecyclerviewDaytaskBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-                return DayTaskViewHolder(binding)
-            }
-        }
+        holder.bind(daytasklist[position])
     }
 
-    class DayTaskDetailComparator : DiffUtil.ItemCallback<DayTaskDetail>() {
-        override fun areItemsTheSame(oldItem: DayTaskDetail, newItem: DayTaskDetail): Boolean {
-            return oldItem === newItem
-        }
+    override fun getItemCount(): Int = daytasklist.size
 
-        override fun areContentsTheSame(oldItem: DayTaskDetail, newItem: DayTaskDetail): Boolean {
-            return oldItem.tId == newItem.tId && oldItem.dId == newItem.dId
+//    fun selectDaytaskDetail(tId: Long) {
+//        dayViewModel?.dayTask?.value
+//    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun updateTasks(daytasks: List<DayTaskDetail>?) {
+        daytasklist = daytasks ?: emptyList()
+        notifyDataSetChanged()
+    }
+}
+
+class DayTaskViewHolder(private val binding: RecyclerviewTaskBinding, private val vm: DayViewModel) : RecyclerView.ViewHolder(binding.root) {
+
+    //var dayViewModel: DayViewModel? = null
+    fun bind(item: DayTaskDetail) {
+        binding.dayTaskDetail = item
+        binding.floatingActionButton.setOnClickListener {
+            vm.setDayTask(item.tId)
+            val action = DayTaskListFragmentDirections.navigateToDaytaskDetail(item.tId)
+            it.findNavController().navigate(action)
         }
     }
+
+////    companion object {
+//        fun create(parent: ViewGroup): DayTaskViewHolder {
+//            val binding = RecyclerviewTaskBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+//            return DayTaskViewHolder(binding)
+//        }
+//    }
 }

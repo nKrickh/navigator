@@ -6,18 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.example.krickhand.navigator.R
-import com.example.krickhand.navigator.databinding.FragmentDaytaskListBinding
 import com.example.krickhand.navigator.databinding.FragmentGatewayBinding
 
-
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-/**
- * A simple [Fragment] subclass.
- * Use the [GatewayFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class GatewayFragment : Fragment() {
 
     private var _binding: FragmentGatewayBinding? = null
@@ -44,10 +34,10 @@ class GatewayFragment : Fragment() {
             gatewayClickHandler(it)
         }
     }
-      fun gatewayClickHandler(view: View) {
+      private fun gatewayClickHandler(view: View) {
         when (view.tag) {
             "toDay" -> {
-                val action = GatewayFragmentDirections.actionGatewayToDayView()
+                val action = GatewayFragmentDirections.actionGatewayToDaylistView()
                 this.findNavController().navigate(action)
             }
             "toNotes" -> {

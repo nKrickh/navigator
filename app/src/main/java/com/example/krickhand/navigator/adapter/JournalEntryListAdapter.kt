@@ -5,7 +5,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.krickhand.navigator.databinding.RecyclerviewDaytaskBinding
+import com.example.krickhand.navigator.databinding.RecyclerviewTaskBinding
+
 import com.example.krickhand.navigator.dto.JournalEntryListItem
 
 class JournalEntryListAdapter(): ListAdapter<JournalEntryListItem, JournalEntryListAdapter.JournalEntryViewHolder>(JournalEntryComparator()) {
@@ -16,7 +17,7 @@ class JournalEntryListAdapter(): ListAdapter<JournalEntryListItem, JournalEntryL
         val current = getItem(position)
         holder.bind(current)
     }
-    class JournalEntryViewHolder(private val binding: RecyclerviewDaytaskBinding) : RecyclerView.ViewHolder(binding.root) {
+    class JournalEntryViewHolder(private val binding: RecyclerviewTaskBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: JournalEntryListItem?) {
             if (item != null) {
                 //binding.taskName.text = item..taskName
@@ -29,7 +30,7 @@ class JournalEntryListAdapter(): ListAdapter<JournalEntryListItem, JournalEntryL
 
         companion object {
             fun create(parent: ViewGroup): JournalEntryViewHolder {
-                val binding = RecyclerviewDaytaskBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+                val binding = RecyclerviewTaskBinding.inflate(LayoutInflater.from(parent.context), parent, false)
                 return JournalEntryViewHolder(binding)
             }
         }

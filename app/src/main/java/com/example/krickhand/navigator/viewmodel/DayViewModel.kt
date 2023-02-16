@@ -7,22 +7,37 @@ import com.example.krickhand.navigator.NaviGatorApplication
 import com.example.krickhand.navigator.dto.DayTaskDetail
 import com.example.krickhand.navigator.entity.*
 import com.example.krickhand.navigator.repo.DayRepository
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.launch
 
 class DayViewModel(
     private val repository: DayRepository,
     private val savedStateHandle: SavedStateHandle) : ViewModel() {
 
+    val data: LiveData<List<DayTaskDetail>>
+        get() = _data
+    private val _data = MutableLiveData<List<DayTaskDetail>>()
+    
+    init {
+        loadData()
+    }
+    private fun loadData() {
+        // co-routine scope with the lifecycle of the ViewModel
+        viewModelScope.launch {
+            _data.value = repository.currentDayTaskList.first()
+        }
+    }
+
 
     val today: LiveData<Day> = repository.today.asLiveData()
-    val daytasklist: LiveData<List<DayTaskDetail>> = repository.currentDayTaskList.asLiveData()
+    //val daytasklist: LiveData<List<DayTaskDetail>> = repository.currentDayTaskList(tempId).asLiveData()
 
     // For the given selected current task
     private val _daytask = MutableLiveData<DayTaskDetail>()
     val dayTask: LiveData<DayTaskDetail> get() = _daytask
 
     fun setDayTask(taskId: Long) {
-        val selectedDaytask = daytasklist.value?.get(0)
-        _daytask.value = selectedDaytask!!
+        _daytask.value = _data.value?.find { it -> it.tId == taskId }
     }
 
     /**

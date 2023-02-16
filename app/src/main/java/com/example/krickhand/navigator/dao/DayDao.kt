@@ -26,7 +26,7 @@ interface DayDao {
             "JOIN tasks AS t ON dt.taskId = t.id " +
             "WHERE t.id = :id"
     )
-    fun loadDayTaskDetails(id: Long): DayTaskDetail
+    suspend fun loadDayTaskDetails(id: Long): DayTaskDetail
 
     @Query(
         "SELECT d.dayShort, d.id AS dId, t.id AS tId, t.name AS taskName, t.`desc` AS taskDesc, dt.isComplete, dt.scheduledStart, dt.scheduledEnd, dt.`desc` FROM tasks AS t " +
