@@ -19,9 +19,9 @@ class DayRepository(private val dayDao: DayDao) {
 
     //private var _currentDayTaskDetail: Flow<DayTaskDetail>
 
-    suspend fun getCurrentDayTaskDetail(id: Long): DayTaskDetail {
-        return dayDao.loadDayTaskDetails(id)
-    }
+//    suspend fun getCurrentDayTaskDetail(id: Long): DayTaskDetail {
+//        return dayDao.loadDayTaskDetails(id)
+//    }
 
 
 }

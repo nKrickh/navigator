@@ -10,69 +10,123 @@
             type="com.example.krickhand.navigator.viewmodel.DayViewModel"/>
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        >
 
-        <TextView
-            android:id="@+id/detailDay"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@{dayViewModel.dayTask.dayShort}"
-            app:layout_constraintBottom_toTopOf="@id/detailTask"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            >
 
-        <TextView
-            android:id="@+id/detailTask"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@{dayViewModel.dayTask.taskName}"
-            app:layout_constraintBottom_toBottomOf="@id/detailTaskDesc"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/detailDay" />
+            <TextView
+                android:id="@+id/label_detailTask"
+                style="@style/label_base"
+                android:text="@string/label_taskName"
+                app:layout_constraintBottom_toBottomOf="@id/taskName_guideline"
+                app:layout_constraintEnd_toStartOf="@id/detailTask"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/detailTaskDesc"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@{dayViewModel.dayTask.desc}"
-            app:layout_constraintBottom_toTopOf="@id/detailScheduledStart"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/detailTask" />
+            <TextView
+                android:id="@+id/detailTask"
+                style="@style/textDisplay_base"
+                android:contentDescription="@string/contDesc_taskName"
+                android:text="@{dayViewModel.dayTask.taskName}"
+                app:layout_constraintBottom_toBottomOf="@id/taskName_guideline"
+                app:layout_constraintStart_toEndOf="@id/label_detailTask"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/detailScheduledStart"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@{dayViewModel.dayTask.scheduledStart}"
-            app:layout_constraintBottom_toTopOf="@id/detailScheduledEnd"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/detailTaskDesc" />
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/taskName_guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.15" />
 
-        <TextView
-            android:id="@+id/detailScheduledEnd"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@{dayViewModel.dayTask.scheduledEnd}"
-            app:layout_constraintBottom_toTopOf="@id/detailDesc"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/detailScheduledStart" />
+            <TextView
+                android:id="@+id/label_detailScheduledStart"
+                style="@style/label_base"
+                android:text="@string/label_scheduledStart"
+                app:layout_constraintBottom_toBottomOf="@id/schedStart_guideline"
+                app:layout_constraintEnd_toStartOf="@id/detailScheduledStart"
 
-        <TextView
-            android:id="@+id/detailDesc"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@{dayViewModel.dayTask.desc}"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/detailScheduledEnd" />
+                app:layout_constraintTop_toBottomOf="@id/taskName_guideline"
+                 />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/detailScheduledStart"
+                style="@style/textDisplay_base"
+                android:contentDescription="@string/contDesc_scheduledStart"
+                android:text="@{dayViewModel.dayTask.scheduledStart}"
+                app:layout_constraintBottom_toBottomOf="@id/schedStart_guideline"
+                app:layout_constraintStart_toEndOf="@id/label_detailScheduledStart"
+                app:layout_constraintTop_toBottomOf="@id/taskName_guideline" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/schedStart_guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.30" />
+
+            <TextView
+                android:id="@+id/label_detailScheduledEnd"
+                style="@style/label_base"
+                android:text="@string/label_scheduledEnd"
+                app:layout_constraintBottom_toBottomOf="@id/schedEnd_guideline"
+                app:layout_constraintEnd_toStartOf="@id/detailScheduledEnd"
+                app:layout_constraintTop_toBottomOf="@id/schedStart_guideline" />
+
+            <TextView
+                android:id="@+id/detailScheduledEnd"
+                style="@style/textDisplay_base"
+                android:contentDescription="@string/contDesc_scheduledEnd"
+                android:text="@{dayViewModel.dayTask.scheduledEnd}"
+                app:layout_constraintBottom_toBottomOf="@id/schedEnd_guideline"
+                app:layout_constraintStart_toEndOf="@id/label_detailScheduledEnd"
+                app:layout_constraintTop_toBottomOf="@id/schedStart_guideline" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/schedEnd_guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.45" />
+
+            <TextView
+                android:id="@+id/label_detailTaskDesc"
+                style="@style/label_base"
+                android:text="@string/label_dayTaskDesc"
+                app:layout_constraintBottom_toBottomOf="@id/notes_guideline"
+                app:layout_constraintEnd_toStartOf="@id/detailTaskDesc"
+                app:layout_constraintTop_toBottomOf="@id/schedEnd_guideline" />
+
+            <TextView
+                android:id="@+id/detailTaskDesc"
+                style="@style/textDisplay_base"
+                android:contentDescription="@string/contDesc_taskDesc"
+                android:text="@{dayViewModel.dayTask.desc}"
+                app:layout_constraintStart_toEndOf="@id/label_detailTaskDesc"
+                app:layout_constraintTop_toBottomOf="@id/schedEnd_guideline"
+                app:layout_constraintBottom_toBottomOf="@id/notes_guideline"/>
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/notes_guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.6" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/dtaskNewFAB"
+                style="@style/add_fab"
+                android:layout_weight="1"
+                android:contentDescription="@string/dtaskNewFabDesc"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/detailScheduledEnd" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 </layout>

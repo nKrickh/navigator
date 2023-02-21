@@ -6,5 +6,7 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "Priority")
 data class Priority(
     @PrimaryKey(autoGenerate = true) val id: Long = 0,
-    val priority: String = ""
+    val priority: String = "",
+    val colour: String = ""
 )
+

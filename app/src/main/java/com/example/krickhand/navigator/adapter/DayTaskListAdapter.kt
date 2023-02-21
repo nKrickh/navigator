@@ -34,10 +34,6 @@ class DayTaskListAdapter(private val dayViewModel: DayViewModel): RecyclerView.A
 
     override fun getItemCount(): Int = daytasklist.size
 
-//    fun selectDaytaskDetail(tId: Long) {
-//        dayViewModel?.dayTask?.value
-//    }
-
     @SuppressLint("NotifyDataSetChanged")
     fun updateTasks(daytasks: List<DayTaskDetail>?) {
         daytasklist = daytasks ?: emptyList()
@@ -46,21 +42,12 @@ class DayTaskListAdapter(private val dayViewModel: DayViewModel): RecyclerView.A
 }
 
 class DayTaskViewHolder(private val binding: RecyclerviewTaskBinding, private val vm: DayViewModel) : RecyclerView.ViewHolder(binding.root) {
-
-    //var dayViewModel: DayViewModel? = null
     fun bind(item: DayTaskDetail) {
         binding.dayTaskDetail = item
-        binding.floatingActionButton.setOnClickListener {
+        binding.dtaskDetailFAB.setOnClickListener {
             vm.setDayTask(item.tId)
-            val action = DayTaskListFragmentDirections.navigateToDaytaskDetail(item.tId)
+            val action = DayTaskListFragmentDirections.navigateToDaytaskDetail()
             it.findNavController().navigate(action)
         }
     }
-
-////    companion object {
-//        fun create(parent: ViewGroup): DayTaskViewHolder {
-//            val binding = RecyclerviewTaskBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-//            return DayTaskViewHolder(binding)
-//        }
-//    }
 }

@@ -9,5 +9,7 @@ data class DayTaskDetail(
     val isComplete: Boolean = false,
     val scheduledStart: String? = "",
     val scheduledEnd: String? = "",
-    val desc: String? = ""
+    val desc: String? = "",
+    val status: String? = "",
+    val priority: String? = ""
 )

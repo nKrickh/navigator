@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.krickhand.navigator.adapter.DayTaskListAdapter
 import com.example.krickhand.navigator.databinding.FragmentDaytaskListBinding
@@ -30,45 +31,25 @@ class DayTaskListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-
         binding.apply {
             dayViewModel = vm
             lifecycleOwner = viewLifecycleOwner
             adapter = DayTaskListAdapter(vm)
-            recyclerView.adapter = adapter
-            recyclerView.layoutManager = LinearLayoutManager(requireContext())
-
+            dtRecyclerView.adapter = adapter
+            dtRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+            dtaskNewFAB.setOnClickListener {
+                addDaytask(it)
+            }
         }
-        //binding.dayViewModel = vm
-        //binding.lifecycleOwner = viewLifecycleOwner
+    }
 
+    fun addDaytask(view: View) {
+        val action = DayTaskListFragmentDirections.navFromDaylistToAdd()
+        view.findNavController().navigate(action)
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
-
-
-//    companion object {
-//        /**
-//         * Use this factory method to create a new instance of
-//         * this fragment using the provided parameters.
-//         *
-//         * @param param1 Parameter 1.
-//         * @param param2 Parameter 2.
-//         * @return A new instance of fragment DayTaskListFragment.
-//         */
-//        // TODO: Rename and change types and number of parameters
-//        @JvmStatic
-//        fun newInstance(param1: String, param2: String) =
-//            DayTaskListFragment().apply {
-//                arguments = Bundle().apply {
-//                    putString(ARG_PARAM1, param1)
-//                    putString(ARG_PARAM2, param2)
-//                }
-//            }
-//    }
-
 }

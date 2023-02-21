@@ -5,39 +5,7 @@
     android:id="@+id/main_nav"
     app:startDestination="@id/gateway">
 
-    <activity
-        android:id="@+id/journal"
-        android:name="com.example.krickhand.navigator.activity.Journal"
-        android:label="activity_journal"
-        tools:layout="@layout/activity_journal" />
-
-    <activity
-        android:id="@+id/notes"
-        android:name="com.example.krickhand.navigator.activity.Notes"
-        android:label="activity_notes"
-        tools:layout="@layout/activity_notes" />
-
-    <fragment
-        android:id="@+id/daylist_fragment"
-        android:name="com.example.krickhand.navigator.fragment.DayTaskListFragment"
-        android:label="fragment_day"
-        tools:layout="@layout/fragment_daytask_list">
-        <action
-            android:id="@+id/navigate_to_daytask_detail"
-            app:destination="@id/daytask_detail"
-            />
-    </fragment>
-
-    <fragment
-        android:id="@+id/daytask_detail"
-        android:name="com.example.krickhand.navigator.fragment.DayTaskDetailFragment"
-        android:label="fragment_day"
-        tools:layout="@layout/fragment_daytask_detail">
-        <argument
-            android:name="daytask_id"
-            app:argType="long"/>
-    </fragment>
-
+    <!--Main Entrance-->
     <fragment
         android:id="@+id/gateway"
         android:name="com.example.krickhand.navigator.fragment.GatewayFragment"
@@ -53,4 +21,50 @@
             android:id="@+id/action_gateway_to_journal"
             app:destination="@id/journal" />
     </fragment>
+
+    <activity
+        android:id="@+id/journal"
+        android:name="com.example.krickhand.navigator.activity.Journal"
+        android:label="activity_journal"
+        tools:layout="@layout/activity_journal" />
+
+    <activity
+        android:id="@+id/notes"
+        android:name="com.example.krickhand.navigator.activity.Notes"
+        android:label="activity_notes"
+        tools:layout="@layout/activity_notes" />
+
+    <fragment
+        android:id="@+id/daylist_fragment"
+        android:name="com.example.krickhand.navigator.fragment.DayTaskListFragment"
+        android:label="fragment_daytasklist"
+        tools:layout="@layout/fragment_daytask_list">
+        <action
+            android:id="@+id/navigate_to_daytask_detail"
+            app:destination="@id/daytask_detail"
+            />
+        <action
+            android:id="@+id/nav_from_daylist_to_add"
+            app:destination="@id/daytask_add"
+            />
+    </fragment>
+
+    <fragment
+        android:id="@+id/daytask_detail"
+        android:name="com.example.krickhand.navigator.fragment.DayTaskDetailFragment"
+        android:label="fragment_daytask_detail"
+        tools:layout="@layout/fragment_daytask_detail">
+        <action
+            android:id="@+id/nav_from_daytask_add"
+            app:destination="@id/daytask_add"
+            />
+    </fragment>
+
+    <fragment
+        android:id="@+id/daytask_add"
+        android:name="com.example.krickhand.navigator.fragment.DayTaskAddFragment"
+        android:label="fragment_daytask_add"
+        tools:layout="@layout/fragment_daytask_add">
+    </fragment>
+
 </navigation>

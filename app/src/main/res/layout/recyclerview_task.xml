@@ -41,17 +41,17 @@
             android:textStyle="bold"
             android:typeface="sans"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/floatingActionButton"
+            app:layout_constraintEnd_toStartOf="@+id/dtaskDetailFAB"
             app:layout_constraintStart_toEndOf="@+id/daytaskCheck"
             app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/floatingActionButton"
+            android:id="@+id/dtaskDetailFAB"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:clickable="true"
-            android:contentDescription="@string/task_fab"
+            android:contentDescription="@string/dtaskDetailFabDesc"
 
             app:backgroundTint="@color/colorAccent"
             app:fabSize="mini"

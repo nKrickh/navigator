@@ -33,17 +33,35 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
+            android:id="@+id/dt_recyclerView"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:padding="@dimen/big_padding"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/dtaskNewFAB"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/dayTitle"
-            app:daytasklist="@{dayViewModel.data}"
-            app:viewmodel="@{dayViewModel}"
+            daytasklist="@{dayViewModel.data}"
+            viewmodel="@{dayViewModel}"
             tools:listitem="@layout/recyclerview_task" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/dtaskNewFAB"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:contentDescription="@string/dtaskNewFabDesc"
+            app:backgroundTint="@color/colorAccent"
+            app:fabSize="mini"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/dt_recyclerView"
+            app:maxImageSize="18dp"
+            app:srcCompat="@drawable/baseline_add_box_24" />
+
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

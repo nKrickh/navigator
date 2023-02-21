@@ -6,5 +6,7 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "Status")
 data class Status(
     @PrimaryKey(autoGenerate = true) val id: Long = 0,
-    val status: String = ""
+    val status: String = "",
+    val colour: String = ""
 )
+

@@ -114,38 +114,60 @@ abstract class NavigatorRoomDB: RoomDatabase() {
                         FormatStyle.LONG))))
             }
 
-
             //val occasions= getOccasionMap(currentYear)
-            // populate sample tasks
+            // populate sample daytask data
+            var statusId = 1L
+            val statusTypes = StatusType.values()
+            val statuses = mutableListOf<Status>()
+            for (status in statusTypes) {
+                statuses.add(Status(statusId++, status.toString(), status.hexColor))
+            }
+
+            var priorityId = 1L
+            val priorityTypes = PriorityType.values()
+            val priorities = mutableListOf<Priority>()
+            for (priority in priorityTypes) {
+                priorities.add(Priority(priorityId++, priority.toString(), priority.hexColor))
+            }
+
             var taskId = 1L
             val tasks = mutableListOf<Task>()
             val daytasks = mutableListOf<DayTask>()
             val sampleTasks = arrayOf("Fry the fish", "Think more about geology", "Dance briskly")
             for (task in sampleTasks) {
-                tasks.add(Task(taskId, task, "Level $taskId"))
-                daytasks.add(DayTask(1, taskId++))
+                tasks.add(Task(taskId, task, "This task worth ${taskId - 2 * 8} POINTS!"))
+                daytasks.add(DayTask
+                    (1, taskId, 1, 1,
+                    scheduledStart = LocalDate.now().toString(),
+                    scheduledEnd = LocalDate.now().plusDays(2).toString(),
+                    desc = "Pickled folly, the lot of it! Why $task at all?"
+                    )
+                )
+                taskId++
             }
-
-            // TODO: test purpose at this point
-//            for (sample in tasks) {
-//                daytasks.add(DayTask(1, sample.taskId))
-//            }
 
             var tagId = 1L
             var topicId = 1L
             var topicCounter = 1L
+
             val tags = mutableListOf<Tag>()
             val topics = mutableListOf<Topic>()
             val tagWithTopics = mutableListOf<TopicTag>()
-            val sampleTags = arrayOf("Tag 1", "Tag 2", "Tag 3", "Tag 4", "Tag 5", "Tag 6")
+            val sampleTags = arrayOf("Practical", "Health", "Code", "Kierkegaard", "Dialectical Materialism", "Fetish")
             val sampleTopics = arrayOf("Topical Inquiries", "Raging Sadism", "Tendrils of Tinnitus")
 
-            for (topic in sampleTopics) topics.add(Topic(topicId++, topic))
+            var colorCounter = 0
+            val colorArray = arrayOf("#129635", "#3933d6", "#87376d", "#bd1900", "#307a5e", "#a0db95")
+
+            for (topic in sampleTopics) {
+                topics.add(Topic(topicId++, topic, "$topic requires clarity", colorArray[colorCounter]))
+                if (++colorCounter > 5) colorCounter = 0
+            }
+
             for (tag in sampleTags) {
-                tags.add(Tag(tagId, tag, "Tag of the $tagId"))
+                tags.add(Tag(tagId, tag, "Let's see about that! Worth ${tagId - 5} POINTS!"))
                 tagWithTopics.add(TopicTag(topicCounter++, tagId++))
-                if (topicCounter > 3)
-                    topicCounter = 1L
+                if (topicCounter > 3) topicCounter = 1L
             }
 
             val sampleTaskTags = mutableListOf(
@@ -162,6 +184,8 @@ abstract class NavigatorRoomDB: RoomDatabase() {
             tagDao.insertTopics(topics)
             tagDao.insertTagTopics(tagWithTopics)
             dayDao.insertTaskTags(sampleTaskTags)
+            dayDao.insertStatuses(statuses)
+            dayDao.insertPriorities(priorities)
             dayDao.insertDayTasks(daytasks)
 
         }

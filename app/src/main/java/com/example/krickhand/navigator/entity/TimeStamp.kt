@@ -6,6 +6,6 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "Timestamps")
 data class TimeStamp(
     @PrimaryKey(autoGenerate = true) val id: Long = 0,
-    val status: String = "",
-    val openState: Boolean = false
+    val stamp: String = "",
+    val lastEdit: String? = ""
 )

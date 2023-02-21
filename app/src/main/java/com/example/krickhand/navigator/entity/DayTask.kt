@@ -15,6 +15,16 @@ import androidx.room.*
             entity = Task::class,
             parentColumns = ["id"],
             childColumns = ["taskId"]
+        ),
+        ForeignKey(
+            entity = Status::class,
+            parentColumns = ["id"],
+            childColumns = ["statusId"]
+        ),
+        ForeignKey(
+            entity = Priority::class,
+            parentColumns = ["id"],
+            childColumns = ["priorityId"]
         )],
     indices = [
         (Index(
@@ -26,6 +36,8 @@ import androidx.room.*
 data class DayTask(
     val dayId: Long,
     val taskId: Long,
+    val priorityId: Long,
+    val statusId: Long,
     val isComplete: Boolean? = false,
     val scheduledStart: String? = "",
     val scheduledEnd: String? = "",
