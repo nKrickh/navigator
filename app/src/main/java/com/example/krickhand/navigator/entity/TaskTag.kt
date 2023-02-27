@@ -28,23 +28,3 @@ data class TaskTag (
     val taskId: Long,
     val tagId: Long
 )
-
-//data class TaskWithTags(
-//    @Embedded val task: Task,
-//    @Relation(
-//        parentColumn = "taskId",
-//        entityColumn = "tagId",
-//        associateBy = Junction(TaskTag::class)
-//    )
-//    val tags: List<Tag>
-//)
-//
-//data class TagWithTasks(
-//    @Embedded val tag: Tag,
-//    @Relation(
-//        parentColumn = "tagId",
-//        entityColumn = "taskId",
-//        associateBy = Junction(TopicTag::class)
-//    )
-//    val tasks: List<Task>
-//)

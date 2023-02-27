@@ -31,11 +31,14 @@ interface DayDao {
            "JOIN priority AS p on dt.priorityId = p.id " +
            "JOIN tasks AS t ON dt.taskId = t.id " +
            "JOIN days AS d ON dt.dayId = d.id " +
-
             "WHERE d.id = :id"
     )
     fun loadDayTaskList(id: Long): Flow<List<DayTaskDetail>>
 
+    @Query(
+        "SELECT tags.id, tags.name, tags.`desc` FROM tags JOIN tasktags AS tt on tags.id = tt.tagId WHERE tt.taskId = :id"
+    )
+    suspend fun loadTaskTags(id: Long): List<Tag>
 
     // coroutines! not on main UI thread
     @Insert(onConflict = OnConflictStrategy.IGNORE)

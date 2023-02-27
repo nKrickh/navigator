@@ -27,9 +27,19 @@
 
     <style name="add_fab">
         <item name="backgroundTint">@color/colorAccent</item>
-        <item name="fabSize">mini</item>
-        <item name="maxImageSize">18dp</item>
+        <item name="fabSize">normal</item>
+        <item name="maxImageSize">30dp</item>
         <item name="srcCompat">@drawable/baseline_add_box_24</item>
+        <item name="android:clickable">true</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="play_fab">
+        <item name="backgroundTint">@color/colorAccent</item>
+        <item name="fabSize">normal</item>
+        <item name="maxImageSize">30dp</item>
+        <item name="srcCompat">@drawable/baseline_play_circle_outline_24</item>
         <item name="android:clickable">true</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>

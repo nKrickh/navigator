@@ -25,18 +25,15 @@ import androidx.room.*
             entity = Priority::class,
             parentColumns = ["id"],
             childColumns = ["priorityId"]
-        )],
-    indices = [
-        (Index(
-            name = "index_dt",
-            value = ["taskId"])
-        )
-    ]
+        )]
 )
 data class DayTask(
     val dayId: Long,
+    @ColumnInfo(index = true)
     val taskId: Long,
+    @ColumnInfo(index = true)
     val priorityId: Long,
+    @ColumnInfo(index = true)
     val statusId: Long,
     val isComplete: Boolean? = false,
     val scheduledStart: String? = "",

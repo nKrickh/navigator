@@ -1,6 +1,9 @@
 package com.example.krickhand.navigator.dto
 
-data class DayTaskDetail(
+import com.example.krickhand.navigator.entity.TaskTag
+import com.example.krickhand.navigator.entity.TimeStamp
+
+class DayTaskDetail(
     val dId: Long = 0,
     val tId: Long = 0,
     val dayShort: String = "",

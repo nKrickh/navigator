@@ -31,6 +31,7 @@ data class JournalPage(
     // TODO: Flesh it out, bud!
     // IDEA: this is an 1800 char string... make this a CONST sorta variable?
     val content: String = "",
+    @ColumnInfo(index = true)
     val journalId: Long,
     val dayId: Long
 )

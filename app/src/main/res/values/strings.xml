@@ -13,6 +13,7 @@
     <!--Day Task List-->
     <string name="dtaskDetailFabDesc">See Task Details</string>
     <string name="dtaskNewFabDesc">Add Task</string>
+    <string name="playFabDesc">Opens a timestamp for selected task</string>
 
     <!--Day Task Detail-->
     <string name="label_dayShort">DAY: </string>
@@ -23,6 +24,7 @@
     <string name="label_dayTaskDesc">NOTES: </string>
     <string name="label_status">STATUS: </string>
     <string name="label_priority">PRIORITY: </string>
+    <string name="label_tags">TAGS: </string>
 
     <string name="contDesc_dayShort">Current selected day</string>
     <string name="contDesc_taskName">Task name</string>

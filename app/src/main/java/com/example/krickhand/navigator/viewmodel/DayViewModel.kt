@@ -14,17 +14,21 @@ class DayViewModel(
     private val repository: DayRepository,
     private val savedStateHandle: SavedStateHandle) : ViewModel() {
 
-    val data: LiveData<List<DayTaskDetail>>
-        get() = _data
+    val data: LiveData<List<DayTaskDetail>> get() = _data
     private val _data = MutableLiveData<List<DayTaskDetail>>()
-    
+
+    val currentOpenTimeStamp: LiveData<TimeStamp> get() = _currentOpenTimeStamp
+    private val _currentOpenTimeStamp = MutableLiveData<TimeStamp>()
+
     init {
         loadData()
     }
     private fun loadData() {
         // co-routine scope with the lifecycle of the ViewModel
         viewModelScope.launch {
-            _data.value = repository.currentDayTaskList.first()
+            repository.currentDayTaskList.collect {
+                _data.value = it
+            }
         }
     }
 
@@ -35,9 +39,18 @@ class DayViewModel(
     // For the given selected current task
     private val _daytask = MutableLiveData<DayTaskDetail>()
     val dayTask: LiveData<DayTaskDetail> get() = _daytask
+    private val _tasktags = MutableLiveData<List<Tag>>()
+    val taskTags: LiveData<List<Tag>> get() = _tasktags
 
     fun setDayTask(taskId: Long) {
         _daytask.value = _data.value?.find { it -> it.tId == taskId }
+
+        viewModelScope.launch {
+            repository.getCurrentDayTaskTags(taskId)
+            _tasktags.value = repository.currentDayTaskTags
+
+        }
+
     }
 
     /**

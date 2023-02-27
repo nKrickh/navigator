@@ -7,14 +7,20 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.krickhand.navigator.adapter.DayTaskListAdapter
+import com.example.krickhand.navigator.adapter.TagListAdapter
 import com.example.krickhand.navigator.databinding.FragmentDaytaskDetailBinding
+import com.example.krickhand.navigator.entity.Tag
 import com.example.krickhand.navigator.viewmodel.DayViewModel
 
 class DayTaskDetailFragment : Fragment() {
 
     private var _binding: FragmentDaytaskDetailBinding? = null
     private val binding get() = _binding!!
-    private val viewmodel: DayViewModel by activityViewModels { DayViewModel.Factory }
+
+    private lateinit var adapter: TagListAdapter
+    private val vm: DayViewModel by activityViewModels { DayViewModel.Factory }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -28,8 +34,11 @@ class DayTaskDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.apply {
-            dayViewModel = viewmodel
+            dayViewModel = vm
             lifecycleOwner = viewLifecycleOwner
+            adapter = TagListAdapter(vm)
+            tagRecyclerView.adapter = adapter
+            tagRecyclerView.layoutManager = LinearLayoutManager(requireContext())
             dtaskNewFAB.setOnClickListener {
                 addDaytask(it)
             }

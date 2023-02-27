@@ -2,6 +2,8 @@ package com.example.krickhand.navigator.repo
 
 import com.example.krickhand.navigator.dao.DayDao
 import com.example.krickhand.navigator.dto.DayTaskDetail
+import com.example.krickhand.navigator.entity.Tag
+import com.example.krickhand.navigator.entity.TaskTag
 import kotlinx.coroutines.flow.Flow
 
 // Declares the DAO as a private property in the constructor. Pass in the DAO
@@ -16,12 +18,12 @@ class DayRepository(private val dayDao: DayDao) {
     private val tempId = 1L
     val today = dayDao.getDay(tempId)
     val currentDayTaskList: Flow<List<DayTaskDetail>> = dayDao.loadDayTaskList(tempId)
+    //val currentDayTaskTags: Flow<List<TaskTag>> = dayDao.loadTaskTags(tempId)
+    lateinit var currentDayTaskTags: List<Tag>
 
-    //private var _currentDayTaskDetail: Flow<DayTaskDetail>
-
-//    suspend fun getCurrentDayTaskDetail(id: Long): DayTaskDetail {
-//        return dayDao.loadDayTaskDetails(id)
-//    }
+    suspend fun getCurrentDayTaskTags(id: Long) {
+        currentDayTaskTags = dayDao.loadTaskTags(id)
+    }
 
 
 }
