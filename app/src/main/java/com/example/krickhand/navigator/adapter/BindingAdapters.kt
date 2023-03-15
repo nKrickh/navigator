@@ -7,16 +7,16 @@ import com.example.krickhand.navigator.dto.DayTaskDetail
 import com.example.krickhand.navigator.entity.Tag
 import com.example.krickhand.navigator.viewmodel.DayViewModel
 
-@BindingAdapter(value = ["daytasklist", "viewmodel"], requireAll = true)
+@BindingAdapter(value = ["daytasklist", "viewmodel"])
 fun setDaytasklist(recyclerView: RecyclerView, daytasklist: LiveData<List<DayTaskDetail>>, vm: DayViewModel) {
     val adapter = getOrCreateDayTaskAdapter(recyclerView, vm)
     adapter.updateTasks(daytasklist.value)
 }
 
-@BindingAdapter(value = ["viewmodel"])
-fun setTaglist(recyclerView: RecyclerView, vm: DayViewModel) {
+@BindingAdapter(value = ["taglist", "viewmodel"])
+fun setTaglist(recyclerView: RecyclerView, taglist: LiveData<List<Tag>>, vm: DayViewModel) {
     val adapter = getOrCreateTagAdapter(recyclerView, vm)
-    adapter.updateTags(vm.taskTags.value)
+    adapter.updateTags(taglist.value)
 }
 private fun getOrCreateDayTaskAdapter(recyclerView: RecyclerView, vm: DayViewModel): DayTaskListAdapter {
     return if (recyclerView.adapter != null && recyclerView.adapter is DayTaskListAdapter) {

@@ -2,6 +2,7 @@ package com.example.krickhand.navigator.repo
 
 import com.example.krickhand.navigator.dao.DayDao
 import com.example.krickhand.navigator.dto.DayTaskDetail
+import com.example.krickhand.navigator.entity.Status
 import com.example.krickhand.navigator.entity.Tag
 import com.example.krickhand.navigator.entity.TaskTag
 import kotlinx.coroutines.flow.Flow
@@ -19,9 +20,10 @@ class DayRepository(private val dayDao: DayDao) {
     val today = dayDao.getDay(tempId)
     val currentDayTaskList: Flow<List<DayTaskDetail>> = dayDao.loadDayTaskList(tempId)
     //val currentDayTaskTags: Flow<List<TaskTag>> = dayDao.loadTaskTags(tempId)
-    lateinit var currentDayTaskTags: List<Tag>
+    lateinit var currentDayTaskTags: Flow<List<Tag>>
 
-    suspend fun getCurrentDayTaskTags(id: Long) {
+
+    fun getCurrentDayTaskTags(id: Long) {
         currentDayTaskTags = dayDao.loadTaskTags(id)
     }
 

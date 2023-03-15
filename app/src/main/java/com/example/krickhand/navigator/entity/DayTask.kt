@@ -25,7 +25,8 @@ import androidx.room.*
             entity = Priority::class,
             parentColumns = ["id"],
             childColumns = ["priorityId"]
-        )]
+        ),
+    ]
 )
 data class DayTask(
     val dayId: Long,

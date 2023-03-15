@@ -36,13 +36,6 @@
                 app:layout_constraintStart_toEndOf="@id/label_detailTask"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/taskName_guideline"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.15" />
-
             <TextView
                 android:id="@+id/label_detailScheduledStart"
                 style="@style/label_base"
@@ -60,12 +53,6 @@
                 app:layout_constraintStart_toEndOf="@id/label_detailScheduledStart"
                 app:layout_constraintTop_toBottomOf="@id/taskName_guideline" />
 
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/schedStart_guideline"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.30" />
 
             <TextView
                 android:id="@+id/label_detailScheduledEnd"
@@ -84,12 +71,24 @@
                 app:layout_constraintStart_toEndOf="@id/label_detailScheduledEnd"
                 app:layout_constraintTop_toBottomOf="@id/schedStart_guideline" />
 
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/schedEnd_guideline"
-                android:layout_width="wrap_content"
+            <TextView
+                android:id="@+id/label_status"
+                style="@style/label_base"
+                android:text="@string/label_status"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/tagRecyclerView"
+                app:layout_constraintTop_toBottomOf="@id/notes_guideline"
+                app:layout_constraintVertical_bias="1.0" />
+
+            <Spinner
+                android:id="@+id/statusSpinner"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.45" />
+                android:layout_marginTop="384dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@id/label_status"
+                app:layout_constraintTop_toBottomOf="parent" />
 
             <TextView
                 android:id="@+id/label_detailTaskDesc"
@@ -104,16 +103,9 @@
                 style="@style/textDisplay_base"
                 android:contentDescription="@string/contDesc_taskDesc"
                 android:text="@{dayViewModel.dayTask.desc}"
+                app:layout_constraintBottom_toBottomOf="@id/notes_guideline"
                 app:layout_constraintStart_toEndOf="@id/label_detailTaskDesc"
-                app:layout_constraintTop_toBottomOf="@id/schedEnd_guideline"
-                app:layout_constraintBottom_toBottomOf="@id/notes_guideline"/>
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/notes_guideline"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.6" />
+                app:layout_constraintTop_toBottomOf="@id/schedEnd_guideline" />
 
             <TextView
                 android:id="@+id/label_detailTaskTags"
@@ -122,17 +114,48 @@
                 app:layout_constraintEnd_toStartOf="@id/tagRecyclerView"
                 app:layout_constraintTop_toBottomOf="@id/notes_guideline" />
 
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/taskName_guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.15" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/schedStart_guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.30" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/schedEnd_guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.45" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/notes_guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.6" />
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/tagRecyclerView"
+                taglist="@{dayViewModel.taskTags}"
+                viewmodel="@{dayViewModel}"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
-                app:layout_constraintWidth_default="percent"
-                app:layout_constraintWidth_percent="0.7"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/label_detailTaskTags"
                 app:layout_constraintTop_toBottomOf="@id/notes_guideline"
-                app:layout_constraintEnd_toEndOf="parent"
-                viewmodel="@{dayViewModel}"
-                tools:listitem="@layout/recyclerview_tag"/>
+                app:layout_constraintWidth_default="percent"
+                app:layout_constraintWidth_percent="0.7"
+                tools:listitem="@layout/recyclerview_tag" />
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/dtaskNewFAB"
@@ -140,8 +163,8 @@
                 android:layout_weight="1"
                 android:contentDescription="@string/dtaskNewFabDesc"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/playFAB" />
+                app:layout_constraintEnd_toStartOf="@id/playFAB"
+                app:layout_constraintStart_toStartOf="parent" />
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/playFAB"
@@ -151,7 +174,6 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/tagRecyclerView"
                 app:layout_constraintStart_toEndOf="@id/dtaskNewFAB" />
-
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

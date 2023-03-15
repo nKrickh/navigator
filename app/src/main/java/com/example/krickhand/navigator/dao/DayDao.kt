@@ -38,7 +38,7 @@ interface DayDao {
     @Query(
         "SELECT tags.id, tags.name, tags.`desc` FROM tags JOIN tasktags AS tt on tags.id = tt.tagId WHERE tt.taskId = :id"
     )
-    suspend fun loadTaskTags(id: Long): List<Tag>
+    fun loadTaskTags(id: Long): Flow<List<Tag>>
 
     // coroutines! not on main UI thread
     @Insert(onConflict = OnConflictStrategy.IGNORE)
@@ -62,6 +62,12 @@ interface DayDao {
     // TO-DO: Why won't suspend with in repo?
     @Query("SELECT * FROM tasks WHERE id = :id")
     fun getTask(id: Long): Flow<Task>
+
+    @Query("SELECT * FROM status")
+    suspend fun getStatuses(): List<Status>
+
+    @Query("SELECT * FROM priority")
+    suspend fun getPriorities(): List<Priority>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertTask(task: Task)

@@ -44,10 +44,5 @@ class TagListAdapter(private val dayViewModel: DayViewModel): RecyclerView.Adapt
 class TagViewHolder(private val binding: RecyclerviewTagBinding, private val vm: DayViewModel) : RecyclerView.ViewHolder(binding.root) {
     fun bind(item: Tag) {
         binding.tag = item
-//        binding.dtaskDetailFAB.setOnClickListener {
-//            vm.setDayTask(item.tId)
-//            val action = DayTaskListFragmentDirections.navigateToDaytaskDetail()
-//            it.findNavController().navigate(action)
-//        }action
     }
 }

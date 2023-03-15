@@ -7,9 +7,6 @@
 
     <data>
         <variable
-            name="dayTaskList"
-            type="com.example.krickhand.navigator.fragment.DayTaskListFragment"/>
-        <variable
             name="dayViewModel"
             type="com.example.krickhand.navigator.viewmodel.DayViewModel"/>
     </data>

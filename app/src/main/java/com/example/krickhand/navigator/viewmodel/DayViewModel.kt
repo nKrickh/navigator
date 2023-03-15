@@ -43,14 +43,13 @@ class DayViewModel(
     val taskTags: LiveData<List<Tag>> get() = _tasktags
 
     fun setDayTask(taskId: Long) {
-        _daytask.value = _data.value?.find { it -> it.tId == taskId }
-
         viewModelScope.launch {
+            _daytask.value = _data.value?.find { it -> it.tId == taskId }
             repository.getCurrentDayTaskTags(taskId)
-            _tasktags.value = repository.currentDayTaskTags
-
+            repository.currentDayTaskTags.collect {
+                _tasktags.value = it
+            }
         }
-
     }
 
     /**
