@@ -13,7 +13,7 @@
     <!--Day Task List-->
     <string name="dtaskDetailFabDesc">See Task Details</string>
     <string name="dtaskNewFabDesc">Add Task</string>
-    <string name="playFabDesc">Opens a timestamp for selected task</string>
+    <string name="playFabDesc">Starts or stops the selected task</string>
 
     <!--Day Task Detail-->
     <string name="label_dayShort">DAY: </string>

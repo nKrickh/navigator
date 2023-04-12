@@ -1,5 +1,6 @@
 package com.example.krickhand.navigator.adapter
 
+
 import androidx.databinding.BindingAdapter
 import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.RecyclerView
@@ -18,6 +19,7 @@ fun setTaglist(recyclerView: RecyclerView, taglist: LiveData<List<Tag>>, vm: Day
     val adapter = getOrCreateTagAdapter(recyclerView, vm)
     adapter.updateTags(taglist.value)
 }
+
 private fun getOrCreateDayTaskAdapter(recyclerView: RecyclerView, vm: DayViewModel): DayTaskListAdapter {
     return if (recyclerView.adapter != null && recyclerView.adapter is DayTaskListAdapter) {
         recyclerView.adapter as DayTaskListAdapter

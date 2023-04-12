@@ -9,17 +9,29 @@ import com.example.krickhand.navigator.entity.*
 import com.example.krickhand.navigator.repo.DayRepository
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
+import java.time.Instant
+import java.util.*
 
 class DayViewModel(
     private val repository: DayRepository,
     private val savedStateHandle: SavedStateHandle) : ViewModel() {
 
+    // List of Daytasks for a given day
     val data: LiveData<List<DayTaskDetail>> get() = _data
     private val _data = MutableLiveData<List<DayTaskDetail>>()
+    val today: LiveData<Day> = repository.today.asLiveData()
 
-    val currentOpenTimeStamp: LiveData<TimeStamp> get() = _currentOpenTimeStamp
-    private val _currentOpenTimeStamp = MutableLiveData<TimeStamp>()
+    // For selected current task
+    private val _daytask = MutableLiveData<DayTaskDetail>()
+    val dayTask: LiveData<DayTaskDetail> get() = _daytask
+    private val _tasktags = MutableLiveData<List<Tag>>()
+    val taskTags: LiveData<List<Tag>> get() = _tasktags
+    val currentTimestamp: LiveData<TimeStamp> get() = _currentTimeStamp
+    private val _currentTimeStamp = MutableLiveData<TimeStamp>()
 
+    val testStamp = TimeStamp()
+
+    // Will load the default data for the current day
     init {
         loadData()
     }
@@ -29,18 +41,20 @@ class DayViewModel(
             repository.currentDayTaskList.collect {
                 _data.value = it
             }
+            // default timestamp - on initialization - TEST DATA
+            //_currentTimeStamp.value = TimeStamp()
+            clearTimestamp(testStamp)
+            val now = Date.from(Instant.now())
+            testStamp.apply {
+                id = 1
+                dId = 1
+                tId = 1
+                open = now.toString()
+                close = now.time.plus(1).toString()
+                lastEdit = this.close
+            }
         }
     }
-
-
-    val today: LiveData<Day> = repository.today.asLiveData()
-    //val daytasklist: LiveData<List<DayTaskDetail>> = repository.currentDayTaskList(tempId).asLiveData()
-
-    // For the given selected current task
-    private val _daytask = MutableLiveData<DayTaskDetail>()
-    val dayTask: LiveData<DayTaskDetail> get() = _daytask
-    private val _tasktags = MutableLiveData<List<Tag>>()
-    val taskTags: LiveData<List<Tag>> get() = _tasktags
 
     fun setDayTask(taskId: Long) {
         viewModelScope.launch {
@@ -49,6 +63,40 @@ class DayViewModel(
             repository.currentDayTaskTags.collect {
                 _tasktags.value = it
             }
+        }
+    }
+
+    fun processTimestamp(dayId: Long, taskId: Long) {
+        viewModelScope.launch {
+//            currentTimestamp.value?.let {
+//                val now = Date.from(Instant.now()).toString()
+//                when (it.open) {
+//                    "" -> {
+//                        it.open = now
+//                        it.dId = dayId
+//                        it.tId = taskId
+//                    }
+//                    else -> {
+//                        it.close = now
+//                        repository.addTimestamp(it)
+//                        clearTimestamp(it)
+//                        //it.open = now
+//                    }
+//                }
+//
+//            }
+//            _currentTimeStamp.value = currentTimestamp.value
+            testStamp.dId = dayId
+            testStamp.tId = taskId
+            repository.addTimestamp(testStamp)
+        }
+    }
+    private fun clearTimestamp(ts: TimeStamp) {
+        ts.apply {
+            dId = 0
+            tId = 0
+            open = ""
+            close = ""
         }
     }
 

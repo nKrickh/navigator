@@ -15,10 +15,11 @@ import androidx.room.*
     ]
 )
 data class TimeStamp(
-    @PrimaryKey(autoGenerate = true) val id: Long = 0,
-    @ColumnInfo(index = true) val dId: Long,
-    @ColumnInfo(index = true) val tId: Long,
-    val open: String = "",
-    val close: String = "",
-    val lastEdit: String? = ""
+    @PrimaryKey(autoGenerate = true) var id: Long = 0,
+    @ColumnInfo(index = true) var dId: Long = 0,
+    @ColumnInfo(index = true) var tId: Long = 0,
+    var open: String = "",
+    var close: String = "",
+    var lastEdit: String? = ""
 )
+

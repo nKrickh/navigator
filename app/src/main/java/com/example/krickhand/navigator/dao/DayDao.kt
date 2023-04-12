@@ -70,6 +70,9 @@ interface DayDao {
     suspend fun getPriorities(): List<Priority>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun insertTimestamp(timestamp: TimeStamp)
+
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertTask(task: Task)
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)

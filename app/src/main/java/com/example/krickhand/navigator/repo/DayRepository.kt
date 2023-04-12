@@ -5,6 +5,7 @@ import com.example.krickhand.navigator.dto.DayTaskDetail
 import com.example.krickhand.navigator.entity.Status
 import com.example.krickhand.navigator.entity.Tag
 import com.example.krickhand.navigator.entity.TaskTag
+import com.example.krickhand.navigator.entity.TimeStamp
 import kotlinx.coroutines.flow.Flow
 
 // Declares the DAO as a private property in the constructor. Pass in the DAO
@@ -22,9 +23,12 @@ class DayRepository(private val dayDao: DayDao) {
     //val currentDayTaskTags: Flow<List<TaskTag>> = dayDao.loadTaskTags(tempId)
     lateinit var currentDayTaskTags: Flow<List<Tag>>
 
-
     fun getCurrentDayTaskTags(id: Long) {
         currentDayTaskTags = dayDao.loadTaskTags(id)
+    }
+
+    suspend fun addTimestamp(ts: TimeStamp) {
+        dayDao.insertTimestamp(ts)
     }
 
 
