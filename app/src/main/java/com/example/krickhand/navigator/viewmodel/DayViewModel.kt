@@ -66,29 +66,22 @@ class DayViewModel(
         }
     }
 
-    fun processTimestamp(dayId: Long, taskId: Long) {
+    fun processTimestamp() {
         viewModelScope.launch {
-//            currentTimestamp.value?.let {
-//                val now = Date.from(Instant.now()).toString()
-//                when (it.open) {
-//                    "" -> {
-//                        it.open = now
-//                        it.dId = dayId
-//                        it.tId = taskId
-//                    }
-//                    else -> {
-//                        it.close = now
-//                        repository.addTimestamp(it)
-//                        clearTimestamp(it)
-//                        //it.open = now
-//                    }
-//                }
-//
-//            }
-//            _currentTimeStamp.value = currentTimestamp.value
-            testStamp.dId = dayId
-            testStamp.tId = taskId
-            repository.addTimestamp(testStamp)
+            val now = Date.from(Instant.now()).toString()
+
+            if (testStamp.open != "") {
+                testStamp.close = now
+                repository.addTimestamp(testStamp)
+                clearTimestamp(testStamp)
+            }
+
+            else {
+                testStamp.dId = dayTask.value!!.dId
+                testStamp.tId = dayTask.value!!.tId
+                testStamp.open = now
+                testStamp.close = ""
+            }
         }
     }
     private fun clearTimestamp(ts: TimeStamp) {
@@ -99,6 +92,7 @@ class DayViewModel(
             close = ""
         }
     }
+
 
     /**
      * Launching a new coroutine to insert the data in a non-blocking way

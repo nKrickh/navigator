@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
+import androidx.activity.addCallback
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -46,9 +48,15 @@ class DayTaskDetailFragment : Fragment() {
             }
 
             playFAB.setOnClickListener {
-                vm.processTimestamp(vm.dayTask.value!!.dId, vm.dayTask.value!!.tId)
+                vm.processTimestamp()
             }
         }
+
+        // Nav ActionBar -> on UP callback
+//        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
+//            this.isEnabled = true
+//            if (vm.testStamp.open != "") vm.processTimestamp()
+//        }
     }
     override fun onDestroyView() {
         super.onDestroyView()
@@ -58,6 +66,5 @@ class DayTaskDetailFragment : Fragment() {
     fun addDaytask(view: View) {
         val action = DayTaskDetailFragmentDirections.navFromDaytaskAdd()
         view.findNavController().navigate(action)
-
     }
 }
