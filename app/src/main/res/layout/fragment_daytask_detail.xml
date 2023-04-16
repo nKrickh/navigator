@@ -156,14 +156,14 @@
                 app:layout_constraintWidth_percent="0.7"
                 tools:listitem="@layout/recyclerview_tag" />
 
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/dtaskNewFAB"
-                style="@style/add_fab"
-                android:layout_weight="1"
-                android:contentDescription="@string/dtaskNewFabDesc"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/playFAB"
-                app:layout_constraintStart_toStartOf="parent" />
+<!--            <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+<!--                android:id="@+id/dtaskNewFAB"-->
+<!--                style="@style/add_fab"-->
+<!--                android:layout_weight="1"-->
+<!--                android:contentDescription="@string/dtaskNewFabDesc"-->
+<!--                app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                app:layout_constraintEnd_toStartOf="@id/playFAB"-->
+<!--                app:layout_constraintStart_toStartOf="parent" />-->
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/playFAB"
@@ -172,7 +172,7 @@
                 android:contentDescription="@string/playFabDesc"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/tagRecyclerView"
-                app:layout_constraintStart_toEndOf="@id/dtaskNewFAB" />
+                app:layout_constraintStart_toStartOf="parent" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

@@ -43,9 +43,9 @@ class DayTaskDetailFragment : Fragment() {
             tagRecyclerView.adapter = adapter
             tagRecyclerView.layoutManager = LinearLayoutManager(requireContext())
 
-            dtaskNewFAB.setOnClickListener {
-                addDaytask(it)
-            }
+//            dtaskNewFAB.setOnClickListener {
+//                addDaytask(it)
+//            }
 
             playFAB.setOnClickListener {
                 vm.processTimestamp()
@@ -63,8 +63,8 @@ class DayTaskDetailFragment : Fragment() {
         _binding = null
     }
 
-    fun addDaytask(view: View) {
-        val action = DayTaskDetailFragmentDirections.navFromDaytaskAdd()
-        view.findNavController().navigate(action)
-    }
+//    fun addDaytask(view: View) {
+//        val action = DayTaskDetailFragmentDirections.navFromDaytaskAdd()
+//        view.findNavController().navigate(action)
+//    }
 }
