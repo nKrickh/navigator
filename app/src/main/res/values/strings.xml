@@ -19,8 +19,8 @@
     <string name="label_dayShort">DAY: </string>
     <string name="label_taskName">TASK: </string>
     <string name="label_taskDesc">WHAT THIS TASK IMAGINES ITSELF TO BE: </string>
-    <string name="label_scheduledStart">SCHEDULED START: </string>
-    <string name="label_scheduledEnd">SCHEDULED END: </string>
+    <string name="label_scheduledStart">START: </string>
+    <string name="label_scheduledEnd">END: </string>
     <string name="label_dayTaskDesc">NOTES: </string>
     <string name="label_status">STATUS: </string>
     <string name="label_priority">PRIORITY: </string>
