@@ -18,163 +18,232 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <TextView
-                android:id="@+id/label_detailTask"
-                style="@style/label_base"
-                android:text="@string/label_taskName"
-                app:layout_constraintBottom_toBottomOf="@id/taskName_guideline"
-                app:layout_constraintEnd_toStartOf="@id/detailTask"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/detailTask"
-                style="@style/textDisplay_base"
-                android:contentDescription="@string/contDesc_taskName"
-                android:text="@{dayViewModel.dayTask.taskName}"
-                app:layout_constraintBottom_toBottomOf="@id/taskName_guideline"
-                app:layout_constraintStart_toEndOf="@id/label_detailTask"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/label_detailScheduledStart"
-                style="@style/label_base"
-                android:text="@string/label_scheduledStart"
-                app:layout_constraintBottom_toBottomOf="@id/schedStart_guideline"
-                app:layout_constraintEnd_toStartOf="@id/detailScheduledStart"
-                app:layout_constraintTop_toBottomOf="@id/taskName_guideline" />
-
-            <TextView
-                android:id="@+id/detailScheduledStart"
-                style="@style/textDisplay_base"
-                android:contentDescription="@string/contDesc_scheduledStart"
-                android:text="@{dayViewModel.dayTask.scheduledStart}"
-                app:layout_constraintBottom_toBottomOf="@id/schedStart_guideline"
-                app:layout_constraintStart_toEndOf="@id/label_detailScheduledStart"
-                app:layout_constraintTop_toBottomOf="@id/taskName_guideline" />
-
-
-            <TextView
-                android:id="@+id/label_detailScheduledEnd"
-                style="@style/label_base"
-                android:text="@string/label_scheduledEnd"
-                app:layout_constraintBottom_toBottomOf="@id/schedEnd_guideline"
-                app:layout_constraintEnd_toStartOf="@id/detailScheduledEnd"
-                app:layout_constraintTop_toBottomOf="@id/schedStart_guideline" />
-
-            <TextView
-                android:id="@+id/detailScheduledEnd"
-                style="@style/textDisplay_base"
-                android:contentDescription="@string/contDesc_scheduledEnd"
-                android:text="@{dayViewModel.dayTask.scheduledEnd}"
-                app:layout_constraintBottom_toBottomOf="@id/schedEnd_guideline"
-                app:layout_constraintStart_toEndOf="@id/label_detailScheduledEnd"
-                app:layout_constraintTop_toBottomOf="@id/schedStart_guideline" />
-
-            <TextView
-                android:id="@+id/label_status"
-                style="@style/label_base"
-                android:text="@string/label_status"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/tagRecyclerView"
-                app:layout_constraintTop_toBottomOf="@id/notes_guideline"
-                app:layout_constraintVertical_bias="1.0" />
-
-            <Spinner
-                android:id="@+id/statusSpinner"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="384dp"
+            <androidx.constraintlayout.helper.widget.Flow
+                android:id="@+id/flow1_dt_task"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:constraint_referenced_ids="label_detailTask,detailTask"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toEndOf="@id/label_status"
-                app:layout_constraintTop_toBottomOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/flow2_dt_start"
+                />
+                <TextView
+                    android:id="@+id/label_detailTask"
+                    style="@style/label_base"
+                    android:text="@string/label_taskName"
+                    app:layout_constraintStart_toStartOf="@id/flow1_dt_task"
+                    app:layout_constraintEnd_toStartOf="@id/detailTask"
+                    app:layout_constraintTop_toTopOf="@id/flow1_dt_task"
+                    app:layout_constraintBottom_toBottomOf="@id/flow1_dt_task"
+                    />
+                <TextView
+                    android:id="@+id/detailTask"
+                    style="@style/textDisplay_base"
+                    android:contentDescription="@string/contDesc_taskName"
+                    android:text="@{dayViewModel.dayTask.taskName}"
+                    app:layout_constraintStart_toEndOf="@id/label_detailTask"
+                    app:layout_constraintEnd_toEndOf="@id/flow1_dt_task"
+                    app:layout_constraintTop_toTopOf="@id/flow1_dt_task"
+                    app:layout_constraintBottom_toBottomOf="@id/flow1_dt_task"
+                    />
 
-            <TextView
-                android:id="@+id/label_detailTaskDesc"
-                style="@style/label_base"
-                android:text="@string/label_dayTaskDesc"
-                app:layout_constraintBottom_toBottomOf="@id/notes_guideline"
-                app:layout_constraintEnd_toStartOf="@id/detailTaskDesc"
-                app:layout_constraintTop_toBottomOf="@id/schedEnd_guideline" />
-
-            <TextView
-                android:id="@+id/detailTaskDesc"
-                style="@style/textDisplay_base"
-                android:contentDescription="@string/contDesc_taskDesc"
-                android:text="@{dayViewModel.dayTask.desc}"
-                app:layout_constraintBottom_toBottomOf="@id/notes_guideline"
-                app:layout_constraintStart_toEndOf="@id/label_detailTaskDesc"
-                app:layout_constraintTop_toBottomOf="@id/schedEnd_guideline" />
-
-            <TextView
-                android:id="@+id/label_detailTaskTags"
-                style="@style/label_base"
-                android:text="@string/label_tags"
-                app:layout_constraintEnd_toStartOf="@id/tagRecyclerView"
-                app:layout_constraintTop_toBottomOf="@id/notes_guideline" />
-
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/taskName_guideline"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.15" />
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/schedStart_guideline"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.30" />
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/schedEnd_guideline"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.45" />
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/notes_guideline"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.6" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/tagRecyclerView"
-                taglist="@{dayViewModel.taskTags}"
-                viewmodel="@{dayViewModel}"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="parent"
+            <androidx.constraintlayout.helper.widget.Flow
+                android:id="@+id/flow2_dt_start"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:constraint_referenced_ids="label_detailScheduledStart,detailScheduledStart"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/label_detailTaskTags"
-                app:layout_constraintTop_toBottomOf="@id/notes_guideline"
-                app:layout_constraintWidth_default="percent"
-                app:layout_constraintWidth_percent="0.7"
-                tools:listitem="@layout/recyclerview_tag" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/flow1_dt_task"
+                app:layout_constraintBottom_toTopOf="@id/flow3_dt_end"
+                />
+                <TextView
+                    android:id="@+id/label_detailScheduledStart"
+                    style="@style/label_base"
+                    android:text="@string/label_scheduledStart"
+                    app:layout_constraintStart_toStartOf="@id/flow2_dt_start"
+                    app:layout_constraintEnd_toStartOf="@id/detailScheduledStart"
+                    app:layout_constraintTop_toTopOf="@id/flow2_dt_start"
+                    app:layout_constraintBottom_toBottomOf="@id/flow2_dt_start"
+                    />
+                <TextView
+                    android:id="@+id/detailScheduledStart"
+                    style="@style/textDisplay_base"
+                    android:contentDescription="@string/contDesc_scheduledStart"
+                    android:text="@{dayViewModel.dayTask.scheduledStart}"
+                    app:layout_constraintStart_toEndOf="@id/label_detailScheduledStart"
+                    app:layout_constraintEnd_toEndOf="@id/flow2_dt_start"
+                    app:layout_constraintTop_toTopOf="@id/label_detailScheduledStart"
+                    />
 
-<!--            <com.google.android.material.floatingactionbutton.FloatingActionButton-->
-<!--                android:id="@+id/dtaskNewFAB"-->
-<!--                style="@style/add_fab"-->
-<!--                android:layout_weight="1"-->
-<!--                android:contentDescription="@string/dtaskNewFabDesc"-->
-<!--                app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                app:layout_constraintEnd_toStartOf="@id/playFAB"-->
-<!--                app:layout_constraintStart_toStartOf="parent" />-->
+            <androidx.constraintlayout.helper.widget.Flow
+                android:id="@+id/flow3_dt_end"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:constraint_referenced_ids="label_detailScheduledEnd,detailScheduledEnd"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/flow2_dt_start"
+                app:layout_constraintBottom_toTopOf="@id/flow4_dt_status"
+                />
+                <TextView
+                    android:id="@+id/label_detailScheduledEnd"
+                    style="@style/label_base"
+                    android:text="@string/label_scheduledEnd"
+                    app:layout_constraintTop_toTopOf="@id/flow3_dt_end"
+                    app:layout_constraintBottom_toBottomOf="@id/flow3_dt_end"
+                    app:layout_constraintStart_toStartOf="@id/flow3_dt_end"
+                    app:layout_constraintEnd_toStartOf="@id/detailScheduledEnd"
+                    />
+                <TextView
+                    android:id="@+id/detailScheduledEnd"
+                    style="@style/textDisplay_base"
+                    android:contentDescription="@string/contDesc_scheduledEnd"
+                    android:text="@{dayViewModel.dayTask.scheduledEnd}"
+                    app:layout_constraintTop_toTopOf="@id/flow3_dt_end"
+                    app:layout_constraintBottom_toBottomOf="@id/flow3_dt_end"
+                    app:layout_constraintStart_toEndOf="@id/label_detailScheduledEnd"
+                    app:layout_constraintEnd_toEndOf="@id/flow3_dt_end"
+                    />
+
+            <androidx.constraintlayout.helper.widget.Flow
+                android:id="@+id/flow4_dt_status"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:constraint_referenced_ids="label_status,statusSpinner"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/flow3_dt_end"
+                app:layout_constraintBottom_toTopOf="@id/flow5_dt_desc"
+                />
+                <TextView
+                    android:id="@+id/label_status"
+                    style="@style/label_base"
+                    android:text="@string/label_status"
+                    app:layout_constraintStart_toStartOf="@id/flow4_dt_status"
+                    app:layout_constraintEnd_toStartOf="@id/statusSpinner"
+                    app:layout_constraintTop_toTopOf="@id/flow4_dt_status"
+                    app:layout_constraintBottom_toBottomOf="@id/flow4_dt_status"
+                    />
+                <Spinner
+                    android:id="@+id/statusSpinner"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="384dp"
+                    app:layout_constraintBottom_toBottomOf="@id/flow4_dt_status"
+                    app:layout_constraintTop_toTopOf="@id/flow4_dt_status"
+                    app:layout_constraintEnd_toEndOf="@id/flow4_dt_status"
+                    app:layout_constraintStart_toEndOf="@id/label_status"
+                    />
+
+            <androidx.constraintlayout.helper.widget.Flow
+                android:id="@+id/flow5_dt_desc"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:constraint_referenced_ids="label_detailTaskDesc,detailTaskDesc"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/flow4_dt_status"
+                app:layout_constraintBottom_toTopOf="@id/flow6_dt_tags"
+                />
+                <TextView
+                    android:id="@+id/label_detailTaskDesc"
+                    style="@style/label_base"
+                    android:text="@string/label_dayTaskDesc"
+                    app:layout_constraintBottom_toBottomOf="@id/flow5_dt_desc"
+                    app:layout_constraintStart_toStartOf="@id/flow5_dt_desc"
+                    app:layout_constraintEnd_toStartOf="@id/detailTaskDesc"
+                    app:layout_constraintTop_toTopOf="@id/flow5_dt_desc" />
+                <TextView
+                    android:id="@+id/detailTaskDesc"
+                    style="@style/textDisplay_base"
+                    android:contentDescription="@string/contDesc_taskDesc"
+                    android:text="@{dayViewModel.dayTask.desc}"
+                    app:layout_constraintTop_toTopOf="@id/flow5_dt_desc"
+                    app:layout_constraintBottom_toBottomOf="@id/flow5_dt_desc"
+                    app:layout_constraintStart_toEndOf="@id/label_detailTaskDesc"
+                    app:layout_constraintEnd_toEndOf="@id/flow5_dt_desc" />
+
+            <androidx.constraintlayout.helper.widget.Flow
+                android:id="@+id/flow6_dt_tags"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:constraint_referenced_ids="label_detailTaskTags,tagRecyclerView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/flow5_dt_desc"
+                />
+
+                <TextView
+                    android:id="@+id/label_detailTaskTags"
+                    style="@style/label_base"
+                    android:text="@string/label_tags"
+                    app:layout_constraintStart_toStartOf="@id/flow6_dt_tags"
+                    app:layout_constraintEnd_toStartOf="@id/tagRecyclerView"
+                    app:layout_constraintTop_toTopOf="@id/flow6_dt_tags"
+                    app:layout_constraintBottom_toBottomOf="@id/flow6_dt_tags"/>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/tagRecyclerView"
+                    taglist="@{dayViewModel.taskTags}"
+                    viewmodel="@{dayViewModel}"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="@id/flow6_dt_tags"
+                    app:layout_constraintTop_toTopOf="@id/flow6_dt_tags"
+                    app:layout_constraintEnd_toEndOf="@id/flow6_dt_tags"
+                    app:layout_constraintStart_toEndOf="@id/label_detailTaskTags"
+                    app:layout_constraintWidth_default="percent"
+                    app:layout_constraintWidth_percent="0.7"
+                    tools:listitem="@layout/recyclerview_tag" />
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/playFAB"
                 style="@style/play_fab"
                 android:layout_weight="1"
                 android:contentDescription="@string/playFabDesc"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/tagRecyclerView"
+                app:layout_constraintTop_toBottomOf="@id/flow6_dt_tags"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
-
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 </layout>
+
+
+    <!--            <androidx.constraintlayout.widget.Guideline-->
+    <!--                android:id="@+id/taskName_guideline"-->
+    <!--                android:layout_width="wrap_content"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:orientation="horizontal"-->
+    <!--                app:layout_constraintGuide_percent="0.15" />-->
+
+    <!--            <androidx.constraintlayout.widget.Guideline-->
+    <!--                android:id="@+id/schedStart_guideline"-->
+    <!--                android:layout_width="wrap_content"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:orientation="horizontal"-->
+    <!--                app:layout_constraintGuide_percent="0.30" />-->
+
+    <!--            <androidx.constraintlayout.widget.Guideline-->
+    <!--                android:id="@+id/schedEnd_guideline"-->
+    <!--                android:layout_width="wrap_content"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:orientation="horizontal"-->
+    <!--                app:layout_constraintGuide_percent="0.45" />-->
+
+    <!--            <androidx.constraintlayout.widget.Guideline-->
+    <!--                android:id="@+id/notes_guideline"-->
+    <!--                android:layout_width="wrap_content"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:orientation="horizontal"-->
+    <!--                app:layout_constraintGuide_percent="0.6" />-->
+
+    <!--            <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+    <!--                android:id="@+id/dtaskNewFAB"-->
+    <!--                style="@style/add_fab"-->
+    <!--                android:layout_weight="1"-->
+    <!--                android:contentDescription="@string/dtaskNewFabDesc"-->
+    <!--                app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--                app:layout_constraintEnd_toStartOf="@id/playFAB"-->
+    <!--                app:layout_constraintStart_toStartOf="parent" />-->
