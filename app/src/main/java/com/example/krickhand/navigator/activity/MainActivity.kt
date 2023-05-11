@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
 
     }
     override fun onSupportNavigateUp(): Boolean {
-        if (dayViewModel.testStamp.open != "") dayViewModel.processTimestamp()
+        if (dayViewModel.currentTimestamp.open != "") dayViewModel.processTimestamp()
         return navController.navigateUp() || super.onSupportNavigateUp()
     }
 }

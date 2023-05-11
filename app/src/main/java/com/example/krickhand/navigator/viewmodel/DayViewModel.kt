@@ -26,10 +26,9 @@ class DayViewModel(
     val dayTask: LiveData<DayTaskDetail> get() = _daytask
     private val _tasktags = MutableLiveData<List<Tag>>()
     val taskTags: LiveData<List<Tag>> get() = _tasktags
-    val currentTimestamp: LiveData<TimeStamp> get() = _currentTimeStamp
-    private val _currentTimeStamp = MutableLiveData<TimeStamp>()
 
-    val testStamp = TimeStamp()
+    val currentTimestamp = TimeStamp()
+    var statusList: List<Status> = emptyList()
 
     // Will load the default data for the current day
     init {
@@ -41,18 +40,20 @@ class DayViewModel(
             repository.currentDayTaskList.collect {
                 _data.value = it
             }
+
             // default timestamp - on initialization - TEST DATA
             //_currentTimeStamp.value = TimeStamp()
-            clearTimestamp(testStamp)
-            val now = Date.from(Instant.now())
-            testStamp.apply {
-                id = 1
-                dId = 1
-                tId = 1
-                open = now.toString()
-                close = now.time.plus(1).toString()
-                lastEdit = this.close
-            }
+            clearTimestamp(currentTimestamp)
+//            val now = Date.from(Instant.now())
+//            testStamp.apply {
+//                id = 1
+//                dId = 1
+//                tId = 1
+//                open = now.toString()
+//                close = now.time.plus(1).toString()
+//                lastEdit = this.close
+//            }
+            statusList = repository.getStatusList()
         }
     }
 
@@ -70,17 +71,17 @@ class DayViewModel(
         viewModelScope.launch {
             val now = Date.from(Instant.now()).toString()
 
-            if (testStamp.open != "") {
-                testStamp.close = now
-                repository.addTimestamp(testStamp)
-                clearTimestamp(testStamp)
+            if (currentTimestamp.open != "") {
+                currentTimestamp.close = now
+                repository.addTimestamp(currentTimestamp)
+                clearTimestamp(currentTimestamp)
             }
 
             else {
-                testStamp.dId = dayTask.value!!.dId
-                testStamp.tId = dayTask.value!!.tId
-                testStamp.open = now
-                testStamp.close = ""
+                currentTimestamp.dId = dayTask.value!!.dId
+                currentTimestamp.tId = dayTask.value!!.tId
+                currentTimestamp.open = now
+                currentTimestamp.close = ""
             }
         }
     }

@@ -5,11 +5,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
+import android.widget.SpinnerAdapter
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.addCallback
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.krickhand.navigator.R
 import com.example.krickhand.navigator.adapter.DayTaskListAdapter
 import com.example.krickhand.navigator.adapter.TagListAdapter
 import com.example.krickhand.navigator.databinding.FragmentDaytaskDetailBinding
@@ -22,6 +25,7 @@ class DayTaskDetailFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var adapter: TagListAdapter
+
     private val vm: DayViewModel by activityViewModels { DayViewModel.Factory }
 
     override fun onCreateView(
@@ -42,6 +46,19 @@ class DayTaskDetailFragment : Fragment() {
             adapter = TagListAdapter(vm)
             tagRecyclerView.adapter = adapter
             tagRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+
+            val spinAdapter = ArrayAdapter(view.context, R.layout.spanner_status, vm.statusList)
+            spinAdapter.setDropDownViewResource(R.layout.spanner_status)
+
+            statusSpinner.apply {
+                adapter = spinAdapter
+                setSelection(0, false)
+            }
+
+
+
+
+
 
 //            dtaskNewFAB.setOnClickListener {
 //                addDaytask(it)

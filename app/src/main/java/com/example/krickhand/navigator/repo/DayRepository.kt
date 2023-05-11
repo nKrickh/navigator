@@ -12,15 +12,11 @@ import kotlinx.coroutines.flow.Flow
 // instead of the whole database, because you only need access to the DAO
 class DayRepository(private val dayDao: DayDao) {
 
-    // Room executes all queries on a separate thread.
-    // Observed Flow will notify the observer when the data has changed.
-    //val allDays: Flow<List<Day>> = dayDao.getAlphabetizedDays()
-    // val todayId = LocalDate.now().dayOfYear.toLong()
-
     private val tempId = 1L
     val today = dayDao.getDay(tempId)
+
+
     val currentDayTaskList: Flow<List<DayTaskDetail>> = dayDao.loadDayTaskList(tempId)
-    //val currentDayTaskTags: Flow<List<TaskTag>> = dayDao.loadTaskTags(tempId)
     lateinit var currentDayTaskTags: Flow<List<Tag>>
 
     fun getCurrentDayTaskTags(id: Long) {
@@ -30,7 +26,9 @@ class DayRepository(private val dayDao: DayDao) {
     suspend fun addTimestamp(ts: TimeStamp) {
         dayDao.insertTimestamp(ts)
     }
-
+    suspend fun getStatusList(): List<Status> {
+        return dayDao.getStatuses()
+    }
 
 }
     // By default Room runs suspend queries off the main thread, therefore, we don't need to
