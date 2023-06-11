@@ -4,15 +4,20 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
+import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Edit
+import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material.icons.outlined.PlayArrow
 import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
@@ -60,11 +65,33 @@ fun DayScreen() {
     Column(modifier = Modifier
         .fillMaxWidth()
         .fillMaxHeight()
-        .border(width = 1.dp, Color.Blue, shape = RoundedCornerShape(1.dp)),
+        .border(
+            width = 1.dp,
+            Color.Blue,
+            shape = RoundedCornerShape(1.dp)),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally) {
 
         Text(text = stringResource(R.string.app_name))
+
+        Box(Modifier
+            .border(
+                width = 2.dp,
+                Color.Green,
+                shape = RoundedCornerShape(1.dp))
+            .fillMaxWidth(),
+            contentAlignment = Alignment.Center
+        ) {
+            Canvas(
+                modifier = Modifier
+                    .size(300.dp)
+                    .border(
+                        width = 2.dp,
+                        Color.Red,
+                        shape = RoundedCornerShape(1.dp))) {
+
+            }
+        }
 
         Text(text = stringResource(R.string.app_name))
 
@@ -74,7 +101,9 @@ fun DayScreen() {
                 width = 1.dp,
                 Color.Blue,
                 shape = RoundedCornerShape(1.dp)
-            )){
+            ),
+            horizontalArrangement = Arrangement.Center
+        ) {
             IconButton(
                 onClick = { /* ... */ },
                 modifier = Modifier.border(
@@ -85,7 +114,23 @@ fun DayScreen() {
                 enabled = true,
                 colors = IconButtonDefaults.outlinedIconButtonColors()
             ) {
-                Icon(Icons.Outlined.PlayArrow, contentDescription = null)
+                Icon(
+                    Icons.Outlined.PlayArrow,
+                    contentDescription = null)
+            }
+            IconButton(
+                onClick = { /* ... */ },
+                modifier = Modifier.border(
+                    width = 2.dp,
+                    Color.Black,
+                    shape = RoundedCornerShape(2.dp)
+                ),
+                enabled = true,
+                colors = IconButtonDefaults.outlinedIconButtonColors()
+            ) {
+                Icon(
+                    Icons.Outlined.Info,
+                    contentDescription = null)
             }
         }
     }
